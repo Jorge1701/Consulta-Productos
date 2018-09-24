@@ -1,3 +1,10 @@
+<?php
+
+$hayCodigo = isset( $_GET["codigo"] );
+$codigo = $hayCodigo ? $_GET["codigo"] : 0;
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +13,7 @@
 </head>
 <body>
 
-	<h1>Código: <?php echo !isset( $_GET["codigo"] ) ? "No hay codigo" : $_GET["codigo"]; ?></h1>
+	<h1>Código: <?php echo ( $hayCodigo ? $codigo : "No hay código" ); ?></h1>
 
 	<script type="text/javascript" src="javascript/jquery.js"></script>
 	<script type="text/javascript" src="javascript/main.js"></script>
