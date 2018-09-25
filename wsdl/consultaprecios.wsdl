@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+	<message name="agregarProductoRequest">
+		<part name="parametro" type="xsd:string"/>
+	</message>
+
+	<message name="agregarProductoResponse">
+		<part name="respuesta" type="xsd:string"/>
+	</message>
+
+	<portType name="FiltroPuerto">
+		<operation name="agregarProducto">
+			<input message="tns:agregarProductoRequest"/>
+			<output message="tns:agregarProductoResponse"/>
+		</operation>
+	</portType>
+
+	<binding name="FiltroBinding" type="tns:FiltroPuerto">
+		<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="agregarProducto">
+			<soap:operation soapAction="urn:AccionAgregarProducto"/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+		</operation>
+	</binding>
+
+	<service name="ConsultaProductosServicio">
+		<port name="FiltroPuerto" binding="tns:FiltroBinding">
+			<soap:address location="http://localhost/consultaproductos/wsdl/servidor.php"/>
+		</port>
+	</service>
+
+</definitions>
