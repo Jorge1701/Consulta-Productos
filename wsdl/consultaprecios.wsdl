@@ -1,25 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns="http://schemas.xmlsoap.org/wsdl/">
 
-	<message name="agregarProductoRequest">
-		<part name="parametro" type="xsd:string"/>
+	<message name="csvRequest">
+		<part name="csv" type="xsd:string"/>
 	</message>
 
-	<message name="agregarProductoResponse">
+	<message name="codigoRequest">
+		<part name="codigo" type="xsd:string"/>
+	</message>
+
+	<message name="productoRequest">
+		<part name="codigo" type="xsd:string"/>
+		<part name="precio" type="xsd:double"/>
+		<part name="descripcion" type="xsd:string"/>
+		<part name="marca" type="xsd:string"/>
+		<part name="detalle" type="xsd:string"/>
+	</message>
+
+	<message name="stringResponse">
 		<part name="respuesta" type="xsd:string"/>
 	</message>
 
 	<portType name="FiltroPuerto">
-		<operation name="agregarProducto">
-			<input message="tns:agregarProductoRequest"/>
-			<output message="tns:agregarProductoResponse"/>
+		<operation name="modificarProducto">
+			<input message="tns:productoRequest"/>
+			<output message="tns:stringResponse"/>
+		</operation>
+		<operation name="borrarProducto">
+			<input message="tns:codigoRequest"/>
+			<output message="tns:stringResponse"/>
+		</operation>
+		<operation name="llenarProductos">
+			<input message="tns:csvRequest"/>
+			<output message="tns:stringResponse"/>
 		</operation>
 	</portType>
 
 	<binding name="FiltroBinding" type="tns:FiltroPuerto">
 		<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
-		<operation name="agregarProducto">
-			<soap:operation soapAction="urn:AccionAgregarProducto"/>
+		<operation name="modificarProducto">
+			<soap:operation soapAction="urn:AccionModificarProducto"/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="borrarProducto">
+			<soap:operation soapAction="urn:AccionBorrarProducto"/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="llenarProductos">
+			<soap:operation soapAction="urn:AccionLlenarProducto"/>
 			<input>
 				<soap:body use="literal"/>
 			</input>
@@ -31,7 +69,7 @@
 
 	<service name="ConsultaProductosServicio">
 		<port name="FiltroPuerto" binding="tns:FiltroBinding">
-			<soap:address location="http://localhost/consultaproductos/wsdl/servidor.php"/>
+			<soap:address location="http://localhost/consultaprecio/wsdl/servidor.php"/>
 		</port>
 	</service>
 

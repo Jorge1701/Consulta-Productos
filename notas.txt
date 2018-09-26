@@ -1,0 +1,21 @@
+En php.ini descomentar extension=soap
+
+Preguntas:
+
+-
+
+TODO:
+
+- Declarar Type del producto en wsdl
+	- Publicar función consultarProducto
+
+- Mensajes de respuesta: OK, o una descripcion del error
+
+- Mensaje de error de la función llenarProductos
+	- En caso de fallar alguno seguir o mandar un error
+	- Dar "OK agregados: x, repetidos: y, fallaron: z"
+	- Detalles si faltan: codigo descripcion y precio
+
+- Que el modificar funcione como alta y modificacion, si no existe lo agrega, si existe modifica todo
+	- Codigo y precio obligatorios
+	- Descripcion mostrar un warning
