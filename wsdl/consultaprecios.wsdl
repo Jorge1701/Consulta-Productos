@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+<definitions
+	name="ConsultaPrecio"
+	targetNamespace="urn:ConsultaPrecio"
+	xmlns:tns="urn:ConsultaPrecio"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/">
 
 	<message name="csvRequest">
+		<part name="clave" type="xsd:string"/>
 		<part name="csv" type="xsd:string"/>
 	</message>
 
 	<message name="codigoRequest">
+		<part name="clave" type="xsd:string"/>
 		<part name="codigo" type="xsd:string"/>
 	</message>
 
 	<message name="productoRequest">
+		<part name="clave" type="xsd:string"/>
 		<part name="codigo" type="xsd:string"/>
 		<part name="precio" type="xsd:double"/>
 		<part name="descripcion" type="xsd:string"/>
@@ -21,7 +32,7 @@
 		<part name="respuesta" type="xsd:string"/>
 	</message>
 
-	<portType name="FiltroPuerto">
+	<portType name="Puerto">
 		<operation name="modificarProducto">
 			<input message="tns:productoRequest"/>
 			<output message="tns:stringResponse"/>
@@ -36,7 +47,7 @@
 		</operation>
 	</portType>
 
-	<binding name="FiltroBinding" type="tns:FiltroPuerto">
+	<binding name="ArticulosBinding" type="tns:Puerto">
 		<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
 		<operation name="modificarProducto">
 			<soap:operation soapAction="urn:AccionModificarProducto"/>
@@ -68,9 +79,8 @@
 	</binding>
 
 	<service name="ConsultaProductosServicio">
-		<port name="FiltroPuerto" binding="tns:FiltroBinding">
+		<port name="Puerto" binding="tns:ArticulosBinding">
 			<soap:address location="http://localhost/consultaprecio/wsdl/servidor.php"/>
 		</port>
 	</service>
-
 </definitions>

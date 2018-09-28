@@ -4,12 +4,31 @@ $cliente = new SoapClient( "http://localhost/consultaprecio/wsdl/consultaprecios
 
 try {
 
-	/*echo $cliente->agregarProducto( "1234500", "Producto 5", "Marca 1", "asd" );
-	echo $cliente->modificarProducto( "1234568", "Producto 2", "Marca 2", 15 );
-	echo $cliente->borrarProducto( "1234569" );*/
+	echo "<h2>Agregar</h2>";
+	echo $cliente->modificarProducto( "clav", "1", 1, "Producto 1", "Marca 1", "Detalle 1" ) . "<br>";
+	echo $cliente->modificarProducto( "clave", "2", 2, "Producto 4", "Marca 1", "Detalle 2" ) . "<br>";
+	echo $cliente->modificarProducto( "clave", "2", 2, "Producto 2", "Marca 1", "Detalle 2" ) . "<br>";
+	echo $cliente->modificarProducto( "clave", "3", 3, "Producto 3", "Marca 1", "Detalle 3" ) . "<br>";
+	echo $cliente->modificarProducto( "clave", "", 3, "Producto 3", "Marca 1", "Detalle 3" ) . "<br>";
+	echo $cliente->modificarProducto( "clave", "3", -10.5, "Producto 3", "Marca 1", "Detalle 3" ) . "<br>";
 
-} catch ( SoapFault $sf ) {
-	echo $sf->getMessage();
+	echo "<h2>Llenar</h2>";
+	echo $cliente->llenarProductos( "clave", file_get_contents( "productos.csv" ) );
+
+	if ( true ) {
+		echo "<h2>Borrar</h2>";
+		echo $cliente->borrarProducto( "clave", "1" ) . "<br>";
+		echo $cliente->borrarProducto( "clave", "2" ) . "<br>";
+		echo $cliente->borrarProducto( "clave", "3" ) . "<br>";
+		echo $cliente->borrarProducto( "clave", "4" ) . "<br>";
+		echo $cliente->borrarProducto( "clave", "5" ) . "<br>";
+		echo $cliente->borrarProducto( "clave", "54" ) . "<br>";
+		echo $cliente->borrarProducto( "clave", "354" ) . "<br>";
+		echo $cliente->borrarProducto( "clave", "6" ) . "<br>";
+	}
+
+} catch ( Exception $sf ) {
+	echo "<br><br>" . $sf->getMessage();
 }
 
 ?>

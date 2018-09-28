@@ -19,3 +19,5 @@ TODO:
 - Que el modificar funcione como alta y modificacion, si no existe lo agrega, si existe modifica todo
 	- Codigo y precio obligatorios
 	- Descripcion mostrar un warning
+
+- Colocar clave de los servicios wsdl en el archivo de configuracion
