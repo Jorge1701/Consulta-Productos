@@ -74,7 +74,7 @@ class Producto {
 			$update->bind_param( "dssss", $precio, $descripcion, $marca, $detalle, $codigo );
 
 			if ( $update->execute() )
-				return "OK Modificado";
+				return "OK";
 			else
 				return "Error: " . $update->error;
 		} else {
@@ -82,7 +82,7 @@ class Producto {
 			$insert->bind_param( "sdsss", $codigo, $precio, $descripcion, $marca, $detalle );
 
 			if ( $insert->execute() )
-				return "OK Agregardo";
+				return "OK";
 			else
 				return "Error: " . $insert->error;
 		}
@@ -111,8 +111,6 @@ class Producto {
 
 		$errores = "";
 		$contErr = 0;
-		$warnings = "";
-		$contWarn = 0;
 
 		$total = 1;
 		$agregados = 0;
@@ -132,11 +130,7 @@ class Producto {
 
 			$resp = Producto::modificarProducto( $valores[0], $valores[1], $valores[2], $valores[3], $valores[4] );
 
-			if ( $resp === "OK Agregardo" )
-				$agregados++;
-			else if ( $resp === "OK Modificado" )
-				$modificados++;
-			else {
+			if ( $resp !== "OK" ) {
 				$errores .= $resp . ", CSV línea " . $total . "\n";
 				$contErr++;
 			}
@@ -144,7 +138,7 @@ class Producto {
 			$total++;
 		}
 
-		return "Total: " . --$total . ", nuevos: " . $agregados . ", modificados: " . $modificados . ", errores: " . $contErr . "\n\n" . $errores . "\n\n" . $warnings;
+		return $contErr ? "Errores: " . $contErr . "\n\n" . $errores : "OK";
 	}
 }
 
