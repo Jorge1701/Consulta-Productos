@@ -25,6 +25,7 @@ try {
 		echo $cliente->borrarProducto( "clave", "54" ) . "<br>";
 		echo $cliente->borrarProducto( "clave", "354" ) . "<br>";
 		echo $cliente->borrarProducto( "clave", "6" ) . "<br>";
+		echo $cliente->borrarProducto( "clave", "10" ) . "<br>";
 	}
 
 } catch ( Exception $sf ) {

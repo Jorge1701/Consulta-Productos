@@ -5,19 +5,25 @@ require( "bd.php" );
 class Producto {
 
 	private $codigo = "";
+	private $precio = 0;
 	private $descripcion = "";
 	private $marca = "";
-	private $precio = 0;
+	private $detalle = "";
 
-	public function __construct( $codigo, $descripcion, $marca, $precio ) {
+	public function __construct( $codigo, $precio, $descripcion, $marca, $detalle ) {
 		$this->codigo = $codigo;
+		$this->precio = $precio;
 		$this->descripcion = $descripcion;
 		$this->marca = $marca;
-		$this->precio = $precio;
+		$this->detalle = $detalle;
 	}
 
 	public function getCodigo() {
 		return $this->codigo;
+	}
+
+	public function getPrecio() {
+		return $this->precio;
 	}
 
 	public function getDescripcion() {
@@ -28,12 +34,12 @@ class Producto {
 		return $this->marca;
 	}
 
-	public function getPrecio() {
-		return $this->precio;
+	public function getDetalle() {
+		return $this->detalle;
 	}
 
 	public static function consultarProducto( $codigo ) {
-		$select = BD::conexion()->prepare( "SELECT descripcion, marca, precio FROM productos WHERE codigo = ?" );
+		$select = BD::conexion()->prepare( "SELECT precio, descripcion, marca, detalle FROM productos WHERE codigo = ?" );
 		$select->bind_param( "s", $codigo );
 		$select->execute();
 		$select->store_result();
@@ -41,9 +47,9 @@ class Producto {
 		$producto = NULL;
 
 		if ( $select->num_rows !== 0 ) {
-			$select->bind_result( $descripcion, $marca, $precio );
+			$select->bind_result( $precio, $descripcion, $marca, $detalle );
 			$select->fetch();
-			$producto = new Producto( $codigo, $descripcion, $marca, $precio );
+			$producto = new Producto( $codigo, $precio, $descripcion, $marca, $detalle );
 		}
 
 		return $producto;
@@ -90,17 +96,20 @@ class Producto {
 
 	public static function borrarProducto( $codigo ) {
 		if ( !isset( $codigo ) || trim( $codigo ) === "" )
-			return "Error: Falta el código\n";
+			return "Error: Falta el código";
 
 		$codigo = trim( $codigo );
 
 		if ( !Producto::consultarProducto( $codigo ) )
-			return "Error: Producto no existe\n";
+			return "Error: Producto no existe";
 
 		$delete = BD::conexion()->prepare( "DELETE FROM productos WHERE codigo = ?" );
 		$delete->bind_param( "s", $codigo );
-		$delete->execute();
-		return "OK";
+
+		if ( $delete->execute() )
+			return "OK";
+		else
+			return "Error: " . $delete->error;
 	}
 
 	public static function llenarProductos( $csv ) {
@@ -109,18 +118,15 @@ class Producto {
 
 		$productos = explode( "\n", $csv );
 
+		$linea = 1;
 		$errores = "";
 		$contErr = 0;
-
-		$total = 1;
-		$agregados = 0;
-		$modificados = 0;
 
 		foreach ( $productos as $p ) {
 			$valores = explode( ",", $p );
 
 			if ( count( $valores ) !== 5 ) {
-				$errores .= "Error: Faltan parámetros, CSV línea " . $total++ . "\n";
+				$errores .= "Error: Faltan parámetros, CSV línea " . $linea++ . "\n";
 				$contErr++;
 				continue;
 			}
@@ -131,11 +137,11 @@ class Producto {
 			$resp = Producto::modificarProducto( $valores[0], $valores[1], $valores[2], $valores[3], $valores[4] );
 
 			if ( $resp !== "OK" ) {
-				$errores .= $resp . ", CSV línea " . $total . "\n";
+				$errores .= $resp . ", CSV línea " . $linea . "\n";
 				$contErr++;
 			}
 
-			$total++;
+			$linea++;
 		}
 
 		return $contErr ? "Errores: " . $contErr . "\n\n" . $errores : "OK";
