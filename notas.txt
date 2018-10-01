@@ -6,4 +6,8 @@ Preguntas:
 
 TODO:
 
-- 
+- Parametrizar
+
+- Hacer que el carousel no se pare cuando se coloca el mouse arriba
+
+- Resumen de las horas

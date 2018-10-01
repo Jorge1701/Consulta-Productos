@@ -5,7 +5,7 @@ $cliente = new SoapClient( "http://localhost/consultaprecio/wsdl/consultaprecios
 try {
 
 	echo "<h2>Agregar</h2>";
-	echo $cliente->modificarProducto( "clave", "1", 1, "Producto 1", "Marca 1", "Detalle 1" ) . "<br>";
+	echo $cliente->modificarProducto( "clave", "1", 1000536.58, "Producto 1", "Marca 1", "Detalle 1" ) . "<br>";
 	echo $cliente->modificarProducto( "clave", "2", 2, "Producto 4", "Marca 1", "Detalle 2" ) . "<br>";
 	echo $cliente->modificarProducto( "clave", "2", 2, "Producto 2", "Marca 1", "Detalle 2" ) . "<br>";
 	echo $cliente->modificarProducto( "clave", "3", 3, "Producto 3", "Marca 1", "Detalle 3" ) . "<br>";
@@ -15,7 +15,7 @@ try {
 	echo "<h2>Llenar</h2>";
 	echo $cliente->llenarProductos( "clave", file_get_contents( "productos.csv" ) );
 
-	if ( true ) {
+	if ( false ) {
 		echo "<h2>Borrar</h2>";
 		echo $cliente->borrarProducto( "clave", "1" ) . "<br>";
 		echo $cliente->borrarProducto( "clave", "2" ) . "<br>";

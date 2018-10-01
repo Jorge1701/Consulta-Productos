@@ -1,0 +1,139 @@
+@import "reset.css";
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+	font-family: 'Roboto', sans-serif;
+	
+	background-color: var(--col-fondo);
+}
+
+/* Carousel de promociones */
+
+#titulo_promo {
+	width: calc(100vw - calc(var(--promo-separacion) * 2));
+	height: var(--promo-alto-titulo);
+	margin: var(--promo-separacion);
+
+	text-align: center;
+	line-height: var(--promo-alto-titulo);
+	font-size: var(--promo-titulo-tam-letra);
+
+	border-radius: 2vh;
+
+	background-color: var(--promo-col-fondo);
+	color: var(--promo-col-letra);
+}
+
+#promociones {
+	width: calc(100vw - calc(var(--promo-separacion) * 2));
+	height: calc(100vh - calc(calc(var(--promo-separacion) * 3) + var(--promo-alto-titulo)));
+	margin: var(--promo-separacion);
+
+	color: var(--promo-col-letra);
+}
+
+#promociones img {
+	height: calc(100vh - calc(calc(var(--promo-separacion) * 3) + var(--promo-alto-titulo)));
+	margin: 0 calc(var(--promo-separacion) * 2);
+
+	border-radius: 2vh;
+}
+
+/*#promociones {
+	box-sizing: border-box;
+	width: var(--promo-ancho);
+	height: var(--promo-alto);
+
+	border-radius: 2.5vw;
+
+	margin: var(--promo-margin);
+
+	background-color: var(--col-b);
+}
+
+#promociones .promo {
+	box-sizing: border-box;
+	width: calc(var(--promo-ancho) - calc(var(--promo-padding) * 2));
+	height: calc(var(--promo-alto) - calc(var(--promo-padding) * 2));
+
+	border-radius: 2.5vw;
+
+	margin: var(--promo-padding);
+
+	text-align: center;
+
+	background-color: var(--col-fondo);
+}
+
+#promociones .promo img {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+
+	border-radius: 2.5vw;
+}*/
+
+/* Consultando precio */
+#informacion {
+	box-sizing: border-box;
+	position: relative;
+
+	width: calc(100vw - calc(var(--info-margin ) * 2));
+	height: calc(100vh - calc(var(--info-margin ) * 2));
+	top: var(--info-margin);
+	left: var(--info-margin);
+
+	padding: 2vw;
+
+	font-size: 5vw;
+
+	border-radius: 2.5vw;
+	box-shadow: .5vw .5vw .05vw black;
+
+	background-color: var(--col-info-prod);
+
+	z-index: 99;
+}
+
+#informacion h3 {
+	font-size: 80%;
+
+	color: grey;
+}
+
+#informacion > div {
+	position: absolute;
+
+	bottom: 2vw;
+	left: 2vw;
+	right: 2vw;
+}
+
+#informacion #marca {
+	font-size: 80%;
+}
+
+#informacion #descripcion {
+	margin-bottom: 5vh;
+}
+
+#precio {
+	position: absolute;
+
+	width: var(--tam-precio);
+	height: calc(var(--tam-precio) / 2);
+	top: calc(40vh - calc(var(--tam-precio) / 2));
+	left: calc(80vw - calc(var(--tam-precio) / 2));
+
+	text-align: center;
+	line-height: calc(var(--tam-precio) / 2);
+	font-size: calc(var(--tam-precio) / 7);
+
+	border-radius: calc(var(--tam-precio) / 2);
+	box-shadow: 0px 0px .2vh .2vh var(--col-precio);
+
+	background-color: var(--col-precio);
+	color: var(--col-letra-precio);
+
+	z-index: 100;
+}
