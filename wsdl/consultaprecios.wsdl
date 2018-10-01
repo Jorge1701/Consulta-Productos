@@ -80,7 +80,7 @@
 
 	<service name="ConsultaProductosServicio">
 		<port name="Puerto" binding="tns:ArticulosBinding">
-			<soap:address location="http://localhost/consultaprecio/wsdl/servidor.php"/>
+			<soap:address location="http://10.10.100.17/consultaprecio/wsdl/servidor.php"/>
 		</port>
 	</service>
 </definitions>
