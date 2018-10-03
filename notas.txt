@@ -6,4 +6,6 @@ Preguntas:
 
 TODO:
 
+- Poner estilos en config.php
+
 - Mantenimiento de imagenes
