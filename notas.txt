@@ -7,5 +7,6 @@ Preguntas:
 TODO:
 
 - Poner estilos en config.php
+- Crear página para configurar
 
 - Mantenimiento de imagenes
