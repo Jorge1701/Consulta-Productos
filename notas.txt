@@ -8,5 +8,6 @@ TODO:
 
 - Poner estilos en config.php
 - Crear página para configurar
+- Crear tablas si no existen
 
 - Mantenimiento de imagenes
