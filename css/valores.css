@@ -1,0 +1,37 @@
+:root {
+	/* Color de fondo de la página en general */
+	--col-fondo: #41a9f4;
+
+	/* Valores de la pantalla de inicio */
+	--promo-col-fondo: white; /* Color de fondo del título */
+	--promo-col-letra: black; /* Color de letra del título */
+	--promo-alto-titulo: 25vh; /* Alto del título */
+	--promo-titulo-tam-letra: 13vh; /* Tamaño de letra del título en pantalla inicio */
+	--promo-separacion: 4vh; /* Separación entre los bordes de la pantalla y los componentes */
+	--promo-bordes: 1vh; /* Que tan redondeados son los bordes del título en la pantalla inicio */
+	--promo-sombra-titulo: .5vw .5vw .05vw black; /* Sombra del título */
+
+	/* Valores en pantalla de consultar precio */
+	/* Caja de información */
+	--info-col-fondo: white; /* Color de fondo */
+	--info-col-titulo: grey; /* Color de título */
+	--info-col-letra: black; /* Color de letra de la descripción y la marca del producto */
+	--info-tam-letra-titulo: 8vh; /* Tamaño de la letra del título */
+	--info-tam-letra-descripcion: 15vh; /* Tamaño de la letra de la descripción */
+	--info-tam-letra-marca: 10vh; /* Tamaño de la letra de la marca */
+	--info-margen: 15vh; /* Margen entre la caja de información y los bordes */
+	--info-padding: 3vh; /* Margen entre los bordes de la caja de información y en contenido */
+	--info-bordes: 2.5vh; /* Que tan redondeados son los bordes */
+	--info-sombra: .5vw .5vw .05vw black; /* Sombra de la caja de información */
+
+	/* Caja donde se muestra el precio */
+	--precio-col-fondo: #2745ea; /* Color de la caja */
+	--precio-col-letra: white; /* Color de la letra */
+	--precio-tam-letra: 17vh; /* Tamaño de la letra */
+	--precio-padding: 5vh; /* Separación entre los bordes de la caja y la letra del precio */
+	--precio-bordes: 2vw; /* Que tan redondeados son los bordes */
+	--precio-sombra: 0 0 2vh .2vh var(--precio-col-fondo); /* Sombra de la caja de precio */
+
+	/* Al cargar cada página los componentes de deslizan a su lugar, este es el tiempo que demoran en llegar */
+	--tiempo: .4s;
+}

@@ -1,6 +1,6 @@
 <?php
 
-require( "clases/config.php" );
+require( "config/config.php" );
 require( "clases/producto.php" );
 
 $hayCodigo = isset( $_GET["codigo"] );
@@ -14,57 +14,26 @@ $producto = $hayCodigo ? Producto::consultarProducto( $codigo ) : NULL;
 <head>
 	<title>Consulta de precio</title>
 	<link rel="stylesheet" type="text/css" href="slick/slick.css">
-	<style type="text/css">
-		:root {
-			--col-fondo: <?php echo color_fondo; ?>;
-
-			/* Promociones */
-			--promo-alto-titulo: 8vh;
-			--promo-separacion: 2vw;
-			--promo-titulo-tam-letra: 6vh;
-
-			--promo-col-fondo: white;
-			--promo-col-letra: black;
-
-
-
-
-
-			--col-precio: <?php echo color_precio; ?>;
-			--col-letra-precio: <?php echo color_letra_precio; ?>;
-
-			--col-b: white;
-			--col-info-prod: <?php echo color_informacion_producto; ?>;
-
-			--tam-precio: 30vw;
-			--tam-info: 35vw;
-			--info-margin: 10vw;
-
-			--promo-margin: 5vw;
-			--promo-ancho: calc(100vw - calc(var(--promo-margin) * 2));
-			--promo-alto: calc(100vh - calc(var(--promo-margin) * 2));
-
-			--promo-padding: 2vw;
-		}
-	</style>
 	<link rel="stylesheet" type="text/css" href="css/stylehseet.css">
 </head>
 <body>
 
 	<?php if ( $hayCodigo ) { ?>
 
-		<div id="precio"><?php echo $producto ? "$ " . $producto->getPrecio() : "Ups!"; ?></div>
+		<div id="precio"><?php echo $producto ? "$ " . $producto->getPrecio() : "$"; ?></div>
 		<div id="informacion">
-			<h3>PRODUCTO</h3>
+			<h3><?php echo texto_titulo_producto; ?></h3>
 			<div>
-				<p id="descripcion"><?php echo $producto ?  $producto->getDescripcion() : "No encontrado"; ?></p>
+				<p id="descripcion"><?php echo $producto ?  $producto->getDescripcion() : texto_no_encontrado; ?></p>
 				<p id="marca"><?php echo $producto ? $producto->getMarca() : ""; ?></p>
 			</div>
 		</div>
 
 	<?php } else { ?>
 
-		<h2 id="titulo_promo">Consultar precio</h2>
+		<img id="img_logo" src="imagenes/logo.jpg">
+		<p id="titulo_promo"><?php echo texto_titulo_inicio; ?></p>
+
 		<div id="promociones">
 			<?php $archivos = scandir( "imagenes/promociones" ) ?>
 			<?php for ( $i = 2; $i < count( $archivos ); $i++ ) { ?>
@@ -81,5 +50,11 @@ $producto = $hayCodigo ? Producto::consultarProducto( $codigo ) : NULL;
 		let tiempoPromocion = <?php echo tiempo_promocion; ?>;
 	</script>
 	<script type="text/javascript" src="javascript/main.js"></script>
+
+	<script type="text/javascript"> hayCodigo = <?php echo $hayCodigo ? "true" : "false"; ?>; </script>
+
+	<?php if ( $producto ) { ?>
+		<script type="text/javascript"> mostrarPrecio(); </script>
+	<?php } ?>
 </body>
 </html>

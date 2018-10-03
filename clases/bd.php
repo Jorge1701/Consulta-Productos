@@ -1,6 +1,6 @@
 <?php
 
-require_once( $_SERVER["DOCUMENT_ROOT"] . "/consultaprecio/clases/config.php" );
+require_once( $_SERVER["DOCUMENT_ROOT"] . "/consultaprecio/config/config.php" );
 
 class BD {
 
