@@ -20,9 +20,9 @@ $producto = $hayCodigo ? Producto::consultarProducto( $codigo ) : NULL;
 
 	<?php if ( $hayCodigo ) { ?>
 
-		<div id="precio"><?php echo $producto ? "$ " . $producto->getPrecio() : "$"; ?></div>
+		<div id="precio"><?php echo $producto ? "$ " . round( $producto->getPrecio() ) : "$"; ?></div>
+		<img id="infoImg" src="<?php echo $producto->getImagen(); ?>">
 		<div id="informacion">
-			<h3><?php echo texto_titulo_producto; ?></h3>
 			<div>
 				<p id="descripcion"><?php echo $producto ?  $producto->getDescripcion() : texto_no_encontrado; ?></p>
 				<p id="marca"><?php echo $producto ? $producto->getMarca() : ""; ?></p>
@@ -54,7 +54,7 @@ $producto = $hayCodigo ? Producto::consultarProducto( $codigo ) : NULL;
 	<script type="text/javascript"> hayCodigo = <?php echo $hayCodigo ? "true" : "false"; ?>; </script>
 
 	<?php if ( $producto ) { ?>
-		<script type="text/javascript"> mostrarPrecio(); </script>
+		<script type="text/javascript"> mostrarPrecio(<?php echo $producto->getPrecio(); ?>); </script>
 	<?php } ?>
 </body>
 </html>

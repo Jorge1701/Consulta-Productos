@@ -1,10 +1,11 @@
 En php.ini descomentar extension=soap
 
-Preguntas:
-
-- 
-
 TODO:
+
+- Colocar logo del comercio si no hay foto de producto
+- Voz en español para Firefox y que sea la misma
+- Chequear que la imagen no este subida, renombrarla y ponerle el código
+- Chequear desde celulares
 
 - Poner estilos en config.php
 - Crear página para configurar

@@ -14,11 +14,9 @@
 	/* Valores en pantalla de consultar precio */
 	/* Caja de información */
 	--info-col-fondo: white; /* Color de fondo */
-	--info-col-titulo: grey; /* Color de título */
 	--info-col-letra: black; /* Color de letra de la descripción y la marca del producto */
-	--info-tam-letra-titulo: 8vh; /* Tamaño de la letra del título */
-	--info-tam-letra-descripcion: 15vh; /* Tamaño de la letra de la descripción */
-	--info-tam-letra-marca: 10vh; /* Tamaño de la letra de la marca */
+	--info-tam-letra-descripcion: 10vh; /* Tamaño de la letra de la descripción */
+	--info-tam-letra-marca: 8vh; /* Tamaño de la letra de la marca */
 	--info-margen: 15vh; /* Margen entre la caja de información y los bordes */
 	--info-padding: 3vh; /* Margen entre los bordes de la caja de información y en contenido */
 	--info-bordes: 2.5vh; /* Que tan redondeados son los bordes */

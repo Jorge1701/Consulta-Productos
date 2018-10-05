@@ -9,13 +9,15 @@ class Producto {
 	private $descripcion = "";
 	private $marca = "";
 	private $detalle = "";
+	private $imagen = "";
 
-	public function __construct( $codigo, $precio, $descripcion, $marca, $detalle ) {
+	public function __construct( $codigo, $precio, $descripcion, $marca, $detalle, $imagen ) {
 		$this->codigo = $codigo;
 		$this->precio = $precio;
 		$this->descripcion = $descripcion;
 		$this->marca = $marca;
 		$this->detalle = $detalle;
+		$this->imagen = $imagen;
 	}
 
 	public function getCodigo() {
@@ -38,8 +40,28 @@ class Producto {
 		return $this->detalle;
 	}
 
+	public function getImagen() {
+		return $this->imagen;
+	}
+
+	public static function subirImagen() {
+		$directorio = "imagenes/productos/";
+		$archivo = $directorio . basename( $_FILES["imagen"]["name"] );
+		$permitido = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png");
+		$tipoArchivo = strtolower( pathinfo( $archivo, PATHINFO_EXTENSION ) );
+
+		if ( !array_key_exists( $tipoArchivo, $permitido ) )
+			return "Error: Tipo de imagen no soportado";
+		else {
+			if ( move_uploaded_file( $_FILES["imagen"]["tmp_name"], $archivo ) )
+				return "OK";
+			else
+				return "Error: No se pudo subir la imagen";
+		}
+	}
+
 	public static function consultarProducto( $codigo ) {
-		$select = BD::conexion()->prepare( "SELECT precio, descripcion, marca, detalle FROM productos WHERE codigo = ?" );
+		$select = BD::conexion()->prepare( "SELECT precio, descripcion, marca, detalle, imagen FROM productos WHERE codigo = ?" );
 		$select->bind_param( "s", $codigo );
 		$select->execute();
 		$select->store_result();
@@ -47,12 +69,33 @@ class Producto {
 		$producto = NULL;
 
 		if ( $select->num_rows !== 0 ) {
-			$select->bind_result( $precio, $descripcion, $marca, $detalle );
+			$select->bind_result( $precio, $descripcion, $marca, $detalle, $imagen );
 			$select->fetch();
-			$producto = new Producto( $codigo, $precio, $descripcion, $marca, $detalle );
+			$producto = new Producto( $codigo, $precio, $descripcion, $marca, $detalle, $imagen );
 		}
 
 		return $producto;
+	}
+
+	public static function listarProductos() {
+		$select = BD::conexion()->prepare( "SELECT codigo, precio, descripcion, marca, detalle, imagen FROM productos" );
+		
+		if ( !$select->execute() )
+			return NULL;
+
+		$select->store_result();
+
+		if ( $select->num_rows === 0 )
+			return NULL;
+
+		$select->bind_result( $codigo, $precio, $descripcion, $marca, $detalle, $imagen );
+
+		$productos = array();
+
+		while ( $select->fetch() )
+			array_push( $productos, new Producto( $codigo, $precio, $descripcion, $marca, $detalle, $imagen ) );
+
+		return $productos;
 	}
 
 	public static function modificarProducto( $codigo, $precio, $descripcion, $marca, $detalle ) {
@@ -92,6 +135,16 @@ class Producto {
 			else
 				return "Error: " . $insert->error;
 		}
+	}
+
+	public static function modificarProductoExistente( $codigoViejo, $codigo, $precio, $descripcion, $marca, $detalle, $imagen ) {
+		$update = BD::conexion()->prepare( "UPDATE productos SET codigo = ?, precio = ?, descripcion = ?, marca = ?, detalle = ?, imagen = ? WHERE codigo = ?" );
+		$update->bind_param( "sdsssss", $codigo, $precio, $descripcion, $marca, $detalle, $imagen, $codigoViejo );
+
+		if ( $update->execute() )
+			return "OK";
+		else
+			return "Error: " . $update->error;
 	}
 
 	public static function borrarProducto( $codigo ) {

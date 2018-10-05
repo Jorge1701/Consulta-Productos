@@ -151,8 +151,35 @@ body {
 	}
 }
 
-#informacion > h3 {
-	color: var(--info-col-titulo);
+#infoImg {
+	position: fixed;
+
+	height: 40vh;
+	top: -100vh;
+	left: calc(var(--info-margen) / 3);
+
+	border: 1px solid black;
+	border-radius: 2.5vw;
+
+	z-index: 2;
+}
+
+@keyframes anim-img {
+	from {
+		top: -100vh;
+	}
+	to {
+		top: calc(var(--info-margen) / 3);
+	}
+}
+
+@keyframes anim-img-ocultar {
+	from {
+		top: calc(var(--info-margen) / 3);
+	}
+	to {
+		top: 200vh;
+	}
 }
 
 #informacion > div {
@@ -161,6 +188,8 @@ body {
 	bottom: var(--info-padding);
 	left: var(--info-padding);
 	right: var(--info-padding);
+
+	text-align: left;
 }
 
 #descripcion {
@@ -176,7 +205,7 @@ body {
 	position: fixed;
 
 	top: -100vh;
-	right: calc(var(--info-margen) / 2);
+	right: calc(var(--info-margen) / 3);
 
 	font-size: var(--precio-tam-letra);
 	text-align: center;
@@ -197,15 +226,107 @@ body {
 		top: -100vh;
 	}
 	to {
-		top: calc(var(--info-margen) / 2);
+		top: calc(var(--info-margen) / 3);
 	}
 }
 
 @keyframes anim-precio-ocultar {
 	from {
-		top: calc(var(--info-margen) / 2);
+		top: calc(var(--info-margen) / 3);
 	}
 	to {
 		top: 200vh;
 	}
+}
+
+/* Páginas de administrado */
+#contenidoModif,
+#contenidoAdmin {
+	width: calc(100vw - 100px);
+	height: calc(100vh - 100px);
+	margin: 50px;
+
+	overflow: auto;
+}
+
+/* Listado de productos */
+#contenidoAdmin table {
+	width: 100%;
+	text-align: center;
+	background-color: white;
+}
+
+#contenidoAdmin table td {
+	vertical-align: middle;
+}
+
+#contenidoAdmin table th {
+	padding: 20px;
+}
+
+#contenidoAdmin table tr:nth-child(even) {
+	background-color: lightgrey;
+}
+
+#contenidoAdmin .imagen {
+	display: inline-block;
+	width: 80px;
+	margin-right: 5vw;
+}
+
+#contenidoAdmin .imagen img:nth-child(1) {
+	width: 100%;
+}
+
+#contenidoAdmin .imagen img:nth-child(2) {
+	position: absolute;
+
+	display: none;
+
+	width: 50vw;
+
+	top: 10vh;
+	left: 25vw;
+	right: 25vw;
+}
+
+#contenidoAdmin .imagen:hover > img:nth-child(2) {
+	display: block;
+}
+
+#contenidoAdmin > div:nth-child(2) {
+	width: 20vw;
+}
+
+#contenidoAdmin > div:nth-child(3) {
+	width: 20vw;
+}
+
+#contenidoAdmin > div {
+	display: inline-block;
+}
+
+/* Modificar producto */
+#contenidoModif > div {
+	width: 30vw;
+	height: 300px;
+	float: left;
+	margin-right: 50px;
+}
+
+#contenidoModif > div img {
+	width: 100%;
+}
+
+#contenidoModif > h2 {
+	margin-bottom: 25px;
+}
+
+#contenidoModif > form label {
+	display: inline-block;
+	width: 100px;
+}
+
+#contenidoModif > form input {
+	margin: 5px 0;
 }

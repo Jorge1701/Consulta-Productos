@@ -6,6 +6,8 @@ var tiempoAnimacion = window.getComputedStyle( document.querySelector( ":root" )
 
 // Al terminar de cargarse el documento se ejecutará esta función
 $( document ).ready( () => {
+	$( document ).focus();
+
 	// Si esta en una página con el parámetro "codigo" hay que esperar la cantidad de tiempo: tiempoProducto
 	if ( window.location.href.includes( "codigo=" ) ) {
 		// Aquí se espera hasta un poco antes de que se salga de la pantalla
@@ -61,15 +63,23 @@ $( document ).keydown( ( evento ) => {
 
 // elemento.style.animation = "nombre-animacion " + tiempoAnimacion + "s forwards"; esta línea ejecuta una animación en el elemento
 
-function mostrarPrecio() {
+function mostrarPrecio( cantidad ) {
 	precioMostrado = true;
 	precio.style.animation = "anim-precio " + tiempoAnimacion + "s forwards";
+	infoImg.style.animation = "anim-img " + tiempoAnimacion + "s forwards";
+
+	let ssu = new SpeechSynthesisUtterance();
+	ssu.lang = "es-ES";
+	ssu.text = "El precio es " + Math.round( cantidad ) + " pesos.";
+	window.speechSynthesis.speak( ssu );
 }
 
 function ocultarPrecio() {
 	// Si el precio no se mostro, no es necesario ocultarlo
-	if ( precioMostrado )
+	if ( precioMostrado ) {
 		precio.style.animation = "anim-precio-ocultar " + tiempoAnimacion + "s forwards";
+		infoImg.style.animation = "anim-img-ocultar " + tiempoAnimacion + "s forwards";
+	}
 
 	// La información si, ya que por mas que el precio no se muestre, la información va a estar en pantalla con el contenido "No encontrado"
 	informacion.style.animation = "anim-info-ocultar " + tiempoAnimacion + "s forwards";
