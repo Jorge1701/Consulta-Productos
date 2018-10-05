@@ -1,6 +1,6 @@
 <?php
 
-require_once( "../clases/config.php" );
+require_once( "../config/config.php" );
 require( "../clases/producto.php" );
 
 ini_set( "soap.wsdl_cache_enabled", 0 );
