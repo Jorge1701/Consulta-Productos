@@ -5,13 +5,14 @@ require( "../clases/producto.php" );
 
 ini_set( "soap.wsdl_cache_enabled", 0 );
 ini_set( "soap.wsdl_cache_ttl", 0 );
+set_time_limit( 320 );
 
-function modificarProducto( $clave, $codigo, $precio, $descripcion, $marca, $detalle ) {
+function modificarProducto( $clave, $codigo, $precio, $descripcion, $marca, $detalle, $moneda ) {
 	if ( $clave != WSDL_CLAVE )
 		return "Error: Clave incorrecta";
 	
 	try {
-		return Producto::modificarProducto( $codigo, $precio, $descripcion, $marca, $detalle );
+		return Producto::modificarProducto( $codigo, $precio, $descripcion, $marca, $detalle, $moneda );
 	} catch ( Exception $e ) {
 		return $e->getMessage();
 	}

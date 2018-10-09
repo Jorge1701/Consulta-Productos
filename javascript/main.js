@@ -63,15 +63,19 @@ $( document ).keydown( ( evento ) => {
 
 // elemento.style.animation = "nombre-animacion " + tiempoAnimacion + "s forwards"; esta línea ejecuta una animación en el elemento
 
-function mostrarPrecio( cantidad ) {
+function mostrarPrecio() {
 	precioMostrado = true;
 	precio.style.animation = "anim-precio " + tiempoAnimacion + "s forwards";
 	infoImg.style.animation = "anim-img " + tiempoAnimacion + "s forwards";
+}
 
-	let ssu = new SpeechSynthesisUtterance();
-	ssu.lang = "es-ES";
-	ssu.text = "El precio es " + Math.round( cantidad ) + " pesos.";
-	window.speechSynthesis.speak( ssu );
+function decirPrecio( cantidad, moneda ) {
+	if ( 'speechSynthesis' in window ) {
+		let ssu = new SpeechSynthesisUtterance();
+		ssu.lang = "es-ES";
+		ssu.text = "El precio es " + Math.round( cantidad ) + " " + moneda + ".";
+		window.speechSynthesis.speak( ssu );
+	}
 }
 
 function ocultarPrecio() {

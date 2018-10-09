@@ -1,6 +1,7 @@
 <?php
 
 require( "clases/producto.php" );
+require( "clases/imagen.php" );
 
 $modificado = "";
 
@@ -12,10 +13,11 @@ if ( isset( $_POST["nuevoCodigo"] ) ) {
 	$descripcion = $_POST["descripcion"];
 	$marca = $_POST["marca"];
 	$detalle = $_POST["detalle"];
+	$moneda = $_POST["moneda"];
 	$imagen = $_POST["viejaImagen"];
 
 	if ( isset( $_FILES["imagen"] ) && !$_FILES["imagen"]["error"] ) {
-		$estado = Producto::subirImagen();
+		$estado = Imagen::subirImagen( "imagenes/productos/", $nuevoCodigo, ".jpg" );
 
 		if ( $estado === "OK" )
 			$imagen = "imagenes/productos/" . basename( $_FILES["imagen"]["name"] );
@@ -23,7 +25,7 @@ if ( isset( $_POST["nuevoCodigo"] ) ) {
 			$modificado = $estado;
 	}
 
-	$modificado = Producto::modificarProductoExistente( $codigo, $nuevoCodigo, $precio, $descripcion, $marca, $detalle, $imagen );
+	$modificado = Producto::modificarProductoExistente( $codigo, $nuevoCodigo, $precio, $descripcion, $marca, $detalle, $moneda, $imagen );
 
 	if ( $modificado == "OK" )
 		header( "Location: /consultaprecio/productos.php" );
@@ -63,6 +65,12 @@ $producto = $hayCodigo ? Producto::consultarProducto( $codigo ) : NULL;
 				<br>
 				<label for="precio">Precio</label>
 				<input type="text" name="precio" value="<?php echo $producto->getPrecio(); ?>">
+				<br>
+				<label for="precio">Moneda</label>
+				<select name="moneda">
+					<option value="1" <?php echo $producto->getMoneda() === "1" ? "selected" : "" ?>>Pesos</option>
+					<option value="2" <?php echo $producto->getMoneda() === "2" ? "selected" : "" ?>>Dolares</option>
+				</select>
 				<br>
 				<label for="descripcion">Descripción</label>
 				<input type="text" name="descripcion" value="<?php echo $producto->getDescripcion(); ?>">

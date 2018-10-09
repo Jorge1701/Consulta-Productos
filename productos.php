@@ -13,14 +13,18 @@ $productos = Producto::listarProductos();
 </head>
 <body>
 
+	<a class="link" href="/consultaprecio/promociones.php">Modificar promociones</a>
+	<a class="link" href="/consultaprecio/configuracion.php">Modificar configuración</a>
+
 	<div id="contenidoAdmin">
 		<?php if ( $productos ) { ?>
-
+			
 			<table>
 				<tr>
 					<th>Imagen</th>
 					<th>Código</th>
 					<th>Precio</th>
+					<th>Moneda</th>
 					<th>Descripción</th>
 					<th>Marca</th>
 					<th>Detalle</th>
@@ -38,6 +42,7 @@ $productos = Producto::listarProductos();
 						</td>
 						<td><?php echo $p->getCodigo(); ?></td>
 						<td><?php echo $p->getPrecio(); ?></td>
+						<td><?php echo $p->getMoneda() === "1" ? "Pesos" : "Dolares"; ?></td>
 						<td><?php echo $p->getDescripcion(); ?></td>
 						<td><?php echo $p->getMarca(); ?></td>
 						<td><?php echo $p->getDetalle(); ?></td>
@@ -54,6 +59,5 @@ $productos = Producto::listarProductos();
 
 		<?php } ?>
 	</div>
-
 </body>
 </html>

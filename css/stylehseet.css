@@ -243,7 +243,7 @@ body {
 #contenidoModif,
 #contenidoAdmin {
 	width: calc(100vw - 100px);
-	height: calc(100vh - 100px);
+	height: calc(100vh - 150px);
 	margin: 50px;
 
 	overflow: auto;
@@ -268,17 +268,17 @@ body {
 	background-color: lightgrey;
 }
 
-#contenidoAdmin .imagen {
+.imagen {
 	display: inline-block;
 	width: 80px;
 	margin-right: 5vw;
 }
 
-#contenidoAdmin .imagen img:nth-child(1) {
+.imagen img:nth-child(1) {
 	width: 100%;
 }
 
-#contenidoAdmin .imagen img:nth-child(2) {
+.imagen img:nth-child(2) {
 	position: absolute;
 
 	display: none;
@@ -290,7 +290,7 @@ body {
 	right: 25vw;
 }
 
-#contenidoAdmin .imagen:hover > img:nth-child(2) {
+.imagen:hover > img:nth-child(2) {
 	display: block;
 }
 
@@ -329,4 +329,47 @@ body {
 
 #contenidoModif > form input {
 	margin: 5px 0;
+}
+
+/* Modificar promociones */
+#nuevaPromo {
+	width: 500px;
+	position: fixed;
+	float: left;
+}
+
+#nuevaPromo #imgMuestra {
+	width: 400px;
+	margin: 10px auto;
+}
+
+#promos {
+	margin-left: 400px;
+}
+
+#promos img {
+	display: inline-block;
+	width: 100%;
+	margin: 10px 0;
+}
+
+.link {
+	display: inline-block;
+
+	width: 350px;
+	height: 50px;
+
+	text-align: center;
+	line-height: 50px;
+	font-size: 25px;
+	text-decoration: none;
+
+	margin: 5px;
+
+	background-color: var(--precio-col-fondo);
+	color: white;
+}
+
+.link:hover {
+	text-decoration: underline;
 }

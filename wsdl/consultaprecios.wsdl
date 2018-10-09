@@ -26,6 +26,7 @@
 		<part name="descripcion" type="xsd:string"/>
 		<part name="marca" type="xsd:string"/>
 		<part name="detalle" type="xsd:string"/>
+		<part name="moneda" type="xsd:string"/>
 	</message>
 
 	<message name="stringResponse">

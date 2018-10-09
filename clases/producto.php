@@ -9,15 +9,15 @@ class Producto {
 	private $descripcion = "";
 	private $marca = "";
 	private $detalle = "";
-	private $imagen = "";
+	private $moneda = "";
 
-	public function __construct( $codigo, $precio, $descripcion, $marca, $detalle, $imagen ) {
+	public function __construct( $codigo, $precio, $descripcion, $marca, $detalle, $moneda ) {
 		$this->codigo = $codigo;
 		$this->precio = $precio;
 		$this->descripcion = $descripcion;
 		$this->marca = $marca;
 		$this->detalle = $detalle;
-		$this->imagen = $imagen;
+		$this->moneda = $moneda;
 	}
 
 	public function getCodigo() {
@@ -40,28 +40,19 @@ class Producto {
 		return $this->detalle;
 	}
 
-	public function getImagen() {
-		return $this->imagen;
+	public function getMoneda() {
+		return $this->moneda;
 	}
 
-	public static function subirImagen() {
-		$directorio = "imagenes/productos/";
-		$archivo = $directorio . basename( $_FILES["imagen"]["name"] );
-		$permitido = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png");
-		$tipoArchivo = strtolower( pathinfo( $archivo, PATHINFO_EXTENSION ) );
+	public function getImagen() {
+		if ( file_exists( "imagenes/productos/" . $this->getCodigo() . ".jpg" ) )
+			return "imagenes/productos/" . $this->getCodigo() . ".jpg";
 
-		if ( !array_key_exists( $tipoArchivo, $permitido ) )
-			return "Error: Tipo de imagen no soportado";
-		else {
-			if ( move_uploaded_file( $_FILES["imagen"]["tmp_name"], $archivo ) )
-				return "OK";
-			else
-				return "Error: No se pudo subir la imagen";
-		}
+		return "imagenes/logo.jpg";
 	}
 
 	public static function consultarProducto( $codigo ) {
-		$select = BD::conexion()->prepare( "SELECT precio, descripcion, marca, detalle, imagen FROM productos WHERE codigo = ?" );
+		$select = BD::conexion()->prepare( "SELECT precio, descripcion, marca, detalle, moneda FROM productos WHERE codigo = ?" );
 		$select->bind_param( "s", $codigo );
 		$select->execute();
 		$select->store_result();
@@ -69,16 +60,16 @@ class Producto {
 		$producto = NULL;
 
 		if ( $select->num_rows !== 0 ) {
-			$select->bind_result( $precio, $descripcion, $marca, $detalle, $imagen );
+			$select->bind_result( $precio, $descripcion, $marca, $detalle, $moneda );
 			$select->fetch();
-			$producto = new Producto( $codigo, $precio, $descripcion, $marca, $detalle, $imagen );
+			$producto = new Producto( $codigo, $precio, $descripcion, $marca, $detalle, $moneda );
 		}
 
 		return $producto;
 	}
 
 	public static function listarProductos() {
-		$select = BD::conexion()->prepare( "SELECT codigo, precio, descripcion, marca, detalle, imagen FROM productos" );
+		$select = BD::conexion()->prepare( "SELECT codigo, precio, descripcion, marca, detalle, moneda FROM productos" );
 		
 		if ( !$select->execute() )
 			return NULL;
@@ -88,17 +79,17 @@ class Producto {
 		if ( $select->num_rows === 0 )
 			return NULL;
 
-		$select->bind_result( $codigo, $precio, $descripcion, $marca, $detalle, $imagen );
+		$select->bind_result( $codigo, $precio, $descripcion, $marca, $detalle, $moneda );
 
 		$productos = array();
 
 		while ( $select->fetch() )
-			array_push( $productos, new Producto( $codigo, $precio, $descripcion, $marca, $detalle, $imagen ) );
+			array_push( $productos, new Producto( $codigo, $precio, $descripcion, $marca, $detalle, $moneda ) );
 
 		return $productos;
 	}
 
-	public static function modificarProducto( $codigo, $precio, $descripcion, $marca, $detalle ) {
+	public static function modificarProducto( $codigo, $precio, $descripcion, $marca, $detalle, $moneda ) {
 		if ( !isset( $codigo ) || trim( $codigo ) === "" )
 			return "Error: Falta el código";
 
@@ -119,16 +110,16 @@ class Producto {
 		$detalle = trim( $detalle );
 
 		if ( Producto::consultarProducto( $codigo ) ) {
-			$update = BD::conexion()->prepare( "UPDATE productos SET precio = ?, descripcion = ?, marca = ?, detalle = ? WHERE codigo = ?" );
-			$update->bind_param( "dssss", $precio, $descripcion, $marca, $detalle, $codigo );
+			$update = BD::conexion()->prepare( "UPDATE productos SET precio = ?, descripcion = ?, marca = ?, detalle = ?, moneda = ? WHERE codigo = ?" );
+			$update->bind_param( "dssss", $precio, $descripcion, $marca, $detalle, $moneda, $codigo );
 
 			if ( $update->execute() )
 				return "OK";
 			else
 				return "Error: " . $update->error;
 		} else {
-			$insert = BD::conexion()->prepare( "INSERT INTO productos ( codigo, precio, descripcion, marca, detalle ) VALUES ( ?, ?, ?, ?, ? )" );
-			$insert->bind_param( "sdsss", $codigo, $precio, $descripcion, $marca, $detalle );
+			$insert = BD::conexion()->prepare( "INSERT INTO productos ( codigo, precio, descripcion, marca, detalle, moneda ) VALUES ( ?, ?, ?, ?, ?, ? )" );
+			$insert->bind_param( "sdssss", $codigo, $precio, $descripcion, $marca, $detalle, $moneda );
 
 			if ( $insert->execute() )
 				return "OK";
@@ -137,9 +128,9 @@ class Producto {
 		}
 	}
 
-	public static function modificarProductoExistente( $codigoViejo, $codigo, $precio, $descripcion, $marca, $detalle, $imagen ) {
-		$update = BD::conexion()->prepare( "UPDATE productos SET codigo = ?, precio = ?, descripcion = ?, marca = ?, detalle = ?, imagen = ? WHERE codigo = ?" );
-		$update->bind_param( "sdsssss", $codigo, $precio, $descripcion, $marca, $detalle, $imagen, $codigoViejo );
+	public static function modificarProductoExistente( $codigoViejo, $codigo, $precio, $descripcion, $marca, $detalle, $moneda, $imagen ) {
+		$update = BD::conexion()->prepare( "UPDATE productos SET codigo = ?, precio = ?, descripcion = ?, marca = ?, detalle = ?, moneda = ? WHERE codigo = ?" );
+		$update->bind_param( "sdsssss", $codigo, $precio, $descripcion, $marca, $detalle, $moneda, $codigoViejo );
 
 		if ( $update->execute() )
 			return "OK";
@@ -178,7 +169,7 @@ class Producto {
 		foreach ( $productos as $p ) {
 			$valores = explode( ",", $p );
 
-			if ( count( $valores ) !== 5 ) {
+			if ( count( $valores ) !== 6 ) {
 				$errores .= "Error: Faltan parámetros, CSV línea " . $linea++ . "\n";
 				$contErr++;
 				continue;
@@ -187,7 +178,7 @@ class Producto {
 			for ( $i = 0; $i < count( $valores ); $i++ )
 				$valores[$i] = trim( $valores[$i] );
 
-			$resp = Producto::modificarProducto( $valores[0], $valores[1], $valores[2], $valores[3], $valores[4] );
+			$resp = Producto::modificarProducto( $valores[0], $valores[1], $valores[2], $valores[3], $valores[4], $valores[5] );
 
 			if ( $resp !== "OK" ) {
 				$errores .= $resp . ", CSV línea " . $linea . "\n";

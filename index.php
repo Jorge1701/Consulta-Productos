@@ -8,7 +8,6 @@ $codigo = $hayCodigo ? $_GET["codigo"] : 0;
 $producto = $hayCodigo ? Producto::consultarProducto( $codigo ) : NULL;
 
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +19,7 @@ $producto = $hayCodigo ? Producto::consultarProducto( $codigo ) : NULL;
 
 	<?php if ( $hayCodigo ) { ?>
 
-		<div id="precio"><?php echo $producto ? "$ " . round( $producto->getPrecio() ) : "$"; ?></div>
+		<div id="precio"><?php echo $producto ? ( $producto->getMoneda() === "2" ? "USD " : "$ " ) . round( $producto->getPrecio() ) : "---"; ?></div>
 		<img id="infoImg" src="<?php echo $producto->getImagen(); ?>">
 		<div id="informacion">
 			<div>
@@ -35,7 +34,8 @@ $producto = $hayCodigo ? Producto::consultarProducto( $codigo ) : NULL;
 		<p id="titulo_promo"><?php echo texto_titulo_inicio; ?></p>
 
 		<div id="promociones">
-			<?php $archivos = scandir( "imagenes/promociones" ) ?>
+			<img src="imagenes/logo.jpg">
+			<?php $archivos = scandir( "imagenes/promociones" ); ?>
 			<?php for ( $i = 2; $i < count( $archivos ); $i++ ) { ?>
 				<img src="imagenes/promociones/<?php echo $archivos[$i]; ?>">
 			<?php } ?>
@@ -54,7 +54,10 @@ $producto = $hayCodigo ? Producto::consultarProducto( $codigo ) : NULL;
 	<script type="text/javascript"> hayCodigo = <?php echo $hayCodigo ? "true" : "false"; ?>; </script>
 
 	<?php if ( $producto ) { ?>
-		<script type="text/javascript"> mostrarPrecio(<?php echo $producto->getPrecio(); ?>); </script>
+		<script type="text/javascript">
+			mostrarPrecio();
+			decirPrecio( <?php echo $producto->getPrecio(); ?>, "<?php echo $producto->getMoneda() === "1" ? "pesos" : "dolares"; ?>" );
+		</script>
 	<?php } ?>
 </body>
 </html>
