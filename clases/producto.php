@@ -111,7 +111,7 @@ class Producto {
 
 		if ( Producto::consultarProducto( $codigo ) ) {
 			$update = BD::conexion()->prepare( "UPDATE productos SET precio = ?, descripcion = ?, marca = ?, detalle = ?, moneda = ? WHERE codigo = ?" );
-			$update->bind_param( "dssss", $precio, $descripcion, $marca, $detalle, $moneda, $codigo );
+			$update->bind_param( "dsssss", $precio, $descripcion, $marca, $detalle, $moneda, $codigo );
 
 			if ( $update->execute() )
 				return "OK";

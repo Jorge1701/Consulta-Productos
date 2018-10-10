@@ -30,6 +30,7 @@ $( document ).ready( () => {
 			autoplaySpeed: tiempoPromocion,
 			variableWidth: true,
 			adaptiveHeight: true,
+			infinite: true
 		} );
 	}
 } );

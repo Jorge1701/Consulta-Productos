@@ -2,13 +2,28 @@ En php.ini descomentar extension=soap
 
 TODO:
 
-- Chequear desde celulares
+- Barra de busqueda y paginacion
 
-- Voz en español para Firefox y que sea la misma
+- Chequear desde celulares
 
 - Poner estilos en config.php
 	- Crear tablas si no existen
 
+- Carousel no pasa si hay menos de 3
+
 - Optimizar función de carga
 
 - Manual de instalación
+
+
+Instalación:
+
+1) Descargar e instalar xampp
+	- Componentes a instalar MySQL y phpMyAdmin
+
+2) Copiar la carpeta del proyecto 'consultaprecio' dentro de C:\xampp\htdocs
+
+3) En el panel de XAMPP: Apache -> Config -> php.ini
+	- Descomentar extension=soap
+
+4) MySQL -> Admin -> Importar -> Seleccionar archivo -> C:\xampp\htdocs\consultaprecio\bd.sql -> Continuar

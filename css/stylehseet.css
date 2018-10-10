@@ -10,6 +10,10 @@ body {
 	overflow: hidden;
 }
 
+:root {
+	--tam-inst: 50px;
+}
+
 /* Carousel de promociones */
 #titulo_promo {
 	box-sizing: border-box;
@@ -100,7 +104,7 @@ body {
 }
 
 #promociones img {
-	height: calc(100vh - calc(calc(var(--promo-separacion) * 3) + var(--promo-alto-titulo)));
+	height: calc(calc(100vh - calc(calc(var(--promo-separacion) * 3) + var(--promo-alto-titulo))) - var(--tam-inst));
 	margin: 0 calc(var(--promo-separacion) * 2);
 
 	border-radius: var(--promo-bordes);
@@ -239,135 +243,50 @@ body {
 	}
 }
 
-/* Páginas de administrado */
-#contenidoModif,
-#contenidoAdmin {
-	width: calc(100vw - 100px);
-	height: calc(100vh - 150px);
-	margin: 50px;
+#institucional {
+	position: fixed;
 
-	overflow: auto;
+	height: calc(var(--tam-inst) + 2vh);
+
+	left: 0;
+	bottom: 0;
+
+	z-index: 5;
 }
 
-/* Listado de productos */
-#contenidoAdmin table {
-	width: 100%;
+#menu {
+	box-sizing: border-box;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	height: 7vh;
+
+	padding: 1vh;
 	text-align: center;
+
 	background-color: white;
 }
 
-#contenidoAdmin table td {
-	vertical-align: middle;
-}
-
-#contenidoAdmin table th {
-	padding: 20px;
-}
-
-#contenidoAdmin table tr:nth-child(even) {
-	background-color: lightgrey;
-}
-
-.imagen {
-	display: inline-block;
-	width: 80px;
-	margin-right: 5vw;
-}
-
-.imagen img:nth-child(1) {
-	width: 100%;
-}
-
-.imagen img:nth-child(2) {
-	position: absolute;
-
-	display: none;
-
-	width: 50vw;
-
-	top: 10vh;
-	left: 25vw;
-	right: 25vw;
-}
-
-.imagen:hover > img:nth-child(2) {
-	display: block;
-}
-
-#contenidoAdmin > div:nth-child(2) {
-	width: 20vw;
-}
-
-#contenidoAdmin > div:nth-child(3) {
-	width: 20vw;
-}
-
-#contenidoAdmin > div {
-	display: inline-block;
-}
-
-/* Modificar producto */
-#contenidoModif > div {
-	width: 30vw;
-	height: 300px;
-	float: left;
-	margin-right: 50px;
-}
-
-#contenidoModif > div img {
-	width: 100%;
-}
-
-#contenidoModif > h2 {
-	margin-bottom: 25px;
-}
-
-#contenidoModif > form label {
-	display: inline-block;
-	width: 100px;
-}
-
-#contenidoModif > form input {
-	margin: 5px 0;
-}
-
-/* Modificar promociones */
-#nuevaPromo {
-	width: 500px;
-	position: fixed;
-	float: left;
-}
-
-#nuevaPromo #imgMuestra {
-	width: 400px;
-	margin: 10px auto;
-}
-
-#promos {
-	margin-left: 400px;
-}
-
-#promos img {
-	display: inline-block;
-	width: 100%;
-	margin: 10px 0;
-}
-
+#menu span,
 .link {
 	display: inline-block;
 
-	width: 350px;
-	height: 50px;
+	width: 32.3vw;
+	height: 5vh;
 
 	text-align: center;
-	line-height: 50px;
-	font-size: 25px;
+	line-height: 4.7vh;
+	font-size: 3vh;
 	text-decoration: none;
-
-	margin: 5px;
 
 	background-color: var(--precio-col-fondo);
 	color: white;
+}
+
+#menu span {
+	background-color: white;
+	color: black;
 }
 
 .link:hover {

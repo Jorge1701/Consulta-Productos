@@ -10,11 +10,15 @@ $productos = Producto::listarProductos();
 <head>
 	<title>Productos</title>
 	<link rel="stylesheet" type="text/css" href="css/stylehseet.css">
+	<link rel="stylesheet" type="text/css" href="css/productos.css">
 </head>
 <body>
 
-	<a class="link" href="/consultaprecio/promociones.php">Modificar promociones</a>
-	<a class="link" href="/consultaprecio/configuracion.php">Modificar configuración</a>
+	<div id="menu">
+		<span>Modificar productos</span>
+		<a class="link" href="/consultaprecio/promociones.php">Modificar promociones</a>
+		<a class="link" href="/consultaprecio/configuracion.php">Modificar configuración</a>
+	</div>
 
 	<div id="contenidoAdmin">
 		<?php if ( $productos ) { ?>

@@ -1,0 +1,4 @@
+texto_titulo_inicio,Título a mostrar en pantalla de espera,Consultar precio
+texto_no_encontrado,Texto a mostrar cuando no se encuentre un producto,No encontrado
+tiempo_producto,Tiempo por el cual un producto va a ser mostrado,7000
+tiempo_promocion,Tiempo en que demora en pasar una imagen de promoción,3000

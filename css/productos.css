@@ -1,0 +1,53 @@
+#contenidoAdmin {
+	width: calc(100vw - 100px);
+	height: calc(100vh - 150px);
+	margin: 50px;
+	margin-top: calc(50px + 6vh);
+
+	overflow: auto;
+}
+
+.imagen {
+	display: inline-block;
+	width: 80px;
+	margin-right: 5vw;
+}
+
+.imagen img:nth-child(1) {
+	width: 100%;
+}
+
+.imagen img:nth-child(2) {
+	position: absolute;
+
+	display: none;
+
+	width: 50vw;
+
+	top: 10vh;
+	left: 25vw;
+	right: 25vw;
+}
+
+.imagen:hover > img:nth-child(2) {
+	display: block;
+}
+
+#contenidoAdmin table {
+	width: 100%;
+	text-align: center;
+	background-color: white;
+}
+
+#contenidoAdmin table td {
+	vertical-align: middle;
+	text-align: center;
+}
+
+#contenidoAdmin table th {
+	padding: 20px;
+}
+
+#contenidoAdmin table tr:nth-child(even) {
+	background-color: lightgrey;
+}

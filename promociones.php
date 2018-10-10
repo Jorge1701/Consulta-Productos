@@ -14,11 +14,15 @@ if ( isset( $_POST["borrar"] ) )
 <head>
 	<title>Promociones</title>
 	<link rel="stylesheet" type="text/css" href="css/stylehseet.css">
+	<link rel="stylesheet" type="text/css" href="css/promociones.css">
 </head>
 <body>
 
-	<a class="link" href="/consultaprecio/productos.php">Modificar productos</a>
-	<a class="link" href="/consultaprecio/configuracion.php">Modificar configuración</a>
+	<div id="menu">
+		<a class="link" href="/consultaprecio/productos.php">Modificar productos</a>
+		<span>Modificar promociones</span>
+		<a class="link" href="/consultaprecio/configuracion.php">Modificar configuración</a>
+	</div>
 
 	<div id="contenidoAdmin">
 		<?php $archivos = scandir( "imagenes/promociones" ) ?>

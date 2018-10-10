@@ -2,6 +2,9 @@
 
 require_once( $_SERVER["DOCUMENT_ROOT"] . "/consultaprecio/config/config.php" );
 
+if ( class_exists( "BD" ) )
+	return;
+
 class BD {
 
 	public static function conexion() {

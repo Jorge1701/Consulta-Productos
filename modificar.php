@@ -41,48 +41,68 @@ $producto = $hayCodigo ? Producto::consultarProducto( $codigo ) : NULL;
 <head>
 	<title>Modificar</title>
 	<link rel="stylesheet" type="text/css" href="css/stylehseet.css">
+	<link rel="stylesheet" type="text/css" href="css/modificarProducto.css">
 </head>
 <body>
+
+	<div id="menu">
+		<a class="link" href="/consultaprecio/productos.php">Modificar productos</a>
+		<a class="link" href="/consultaprecio/promociones.php">Modificar promociones</a>
+		<a class="link" href="/consultaprecio/configuracion.php">Modificar configuración</a>
+	</div>
 
 	<div id="contenidoModif">
 
 		<?php if ( $producto ) { ?>
 
-			<div>
+			<div id="imgMuestra">
 				<img id="imgMuestra" src="<?php echo $producto->getImagen(); ?>">
 			</div>
 
-			<h2>Modificar producto</h2>
+			<div id="formModif">
 
-			<form method="POST" enctype="multipart/form-data">
-				<input type="text" name="codigo" value="<?php echo $producto->getCodigo(); ?>" hidden>
-				<input type="text" name="viejaImagen" value="<?php echo $producto->getImagen(); ?>" hidden>
-				<label for="imagen">Imagen</label>
-				<input id="inputImg" type="file" accept="image/*" name="imagen">
-				<br>
-				<label for="nuevoCodigo">Código</label>
-				<input type="text" name="nuevoCodigo" value="<?php echo $producto->getCodigo(); ?>">
-				<br>
-				<label for="precio">Precio</label>
-				<input type="text" name="precio" value="<?php echo $producto->getPrecio(); ?>">
-				<br>
-				<label for="precio">Moneda</label>
-				<select name="moneda">
-					<option value="1" <?php echo $producto->getMoneda() === "1" ? "selected" : "" ?>>Pesos</option>
-					<option value="2" <?php echo $producto->getMoneda() === "2" ? "selected" : "" ?>>Dolares</option>
-				</select>
-				<br>
-				<label for="descripcion">Descripción</label>
-				<input type="text" name="descripcion" value="<?php echo $producto->getDescripcion(); ?>">
-				<br>
-				<label for="marca">Marca</label>
-				<input type="text" name="marca" value="<?php echo $producto->getMarca(); ?>">
-				<br>
-				<label for="detalle">Detalle</label>
-				<input type="text" name="detalle" value="<?php echo $producto->getDetalle(); ?>">
-				<br>
-				<input type="submit" value="Modificar">
-			</form>
+				<h2>Modificar producto</h2>
+
+				<form method="POST" enctype="multipart/form-data">
+					<input type="text" name="codigo" value="<?php echo $producto->getCodigo(); ?>" hidden>
+					<input type="text" name="viejaImagen" value="<?php echo $producto->getImagen(); ?>" hidden>
+					<div>
+						<label for="imagen">Imagen</label>
+						<input id="inputImg" type="file" accept="image/*" name="imagen">
+					</div>
+					<div>
+						<label for="nuevoCodigo">Código</label>
+						<input type="text" name="nuevoCodigo" value="<?php echo $producto->getCodigo(); ?>">
+					</div>
+					<div>
+						<label for="precio">Precio</label>
+						<input type="text" name="precio" value="<?php echo $producto->getPrecio(); ?>">
+					</div>
+					<div>
+						<label for="precio">Moneda</label>
+						<select name="moneda">
+							<option value="1" <?php echo $producto->getMoneda() === "1" ? "selected" : "" ?>>Pesos</option>
+							<option value="2" <?php echo $producto->getMoneda() === "2" ? "selected" : "" ?>>Dolares</option>
+						</select>
+					</div>
+					<div>
+						<label for="descripcion">Descripción</label>
+						<input type="text" name="descripcion" value="<?php echo $producto->getDescripcion(); ?>">
+					</div>
+					<div>
+						<label for="marca">Marca</label>
+						<input type="text" name="marca" value="<?php echo $producto->getMarca(); ?>">
+					</div>
+					<div>
+						<label for="detalle">Detalle</label>
+						<input type="text" name="detalle" value="<?php echo $producto->getDetalle(); ?>">
+					</div>
+					<div>
+						<input type="submit" value="Modificar">
+					</div>
+				</form>
+
+			</div>
 
 		<?php } else { ?>
 

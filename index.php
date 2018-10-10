@@ -1,12 +1,14 @@
 <?php
 
 require( "config/config.php" );
+require( "clases/configuracion.php" );
 require( "clases/producto.php" );
+
+configuracion::definir();
 
 $hayCodigo = isset( $_GET["codigo"] );
 $codigo = $hayCodigo ? $_GET["codigo"] : 0;
 $producto = $hayCodigo ? Producto::consultarProducto( $codigo ) : NULL;
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,10 +19,12 @@ $producto = $hayCodigo ? Producto::consultarProducto( $codigo ) : NULL;
 </head>
 <body>
 
+	<img id="institucional" src="imagenes/byg-institucional-slim.png">
+
 	<?php if ( $hayCodigo ) { ?>
 
 		<div id="precio"><?php echo $producto ? ( $producto->getMoneda() === "2" ? "USD " : "$ " ) . round( $producto->getPrecio() ) : "---"; ?></div>
-		<img id="infoImg" src="<?php echo $producto->getImagen(); ?>">
+		<img id="infoImg" src="<?php echo $producto ? $producto->getImagen() : ''; ?>">
 		<div id="informacion">
 			<div>
 				<p id="descripcion"><?php echo $producto ?  $producto->getDescripcion() : texto_no_encontrado; ?></p>

@@ -1,0 +1,55 @@
+#parametros {
+	min-width: 500px;
+	width: 50vw;
+	height: calc(93vh - 100px);
+
+	margin: 0 auto;
+	margin-top: calc(7vh + 50px);
+
+	padding: 5px;
+
+	background-color: lightgrey;
+}
+
+#cargar {
+	padding: 5px;
+
+	background-color: white;
+}
+
+#btnGuardar,
+#btnCargar {
+	width: 100%;
+	padding: 5px;
+}
+
+#btnGuardar {
+	margin-top: 15px;
+}
+
+table {
+	display: block;
+	height: calc(93vh - 220px);
+
+	border-spacing: 5px;
+	border-collapse: separate;
+
+	overflow: auto;
+}
+
+table tr td:nth-child(1) {
+	width: 100%;
+}
+
+table tr td {
+	padding: 5px;
+	vertical-align: middle;
+}
+
+table tr td:nth-child(2) {
+	background-color: lightgrey;
+}
+
+table tr {
+	background-color: white;
+}
