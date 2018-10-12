@@ -1,5 +1,8 @@
 <?php
 
+$timezone = "America/Montevideo";
+date_default_timezone_set($timezone);
+
 require( "config/config.php" );
 require( "clases/configuracion.php" );
 require( "clases/producto.php" );
@@ -20,7 +23,7 @@ $producto = $hayCodigo ? Producto::consultarProducto( $codigo ) : NULL;
 
 	<img id="institucional" src="imagenes/byg-institucional-slim.png">
 
-	<?php if ( $hayCodigo ) { ?>
+	<?php if ( $hayCodigo ) { file_put_contents(date('Ym').'-log.txt', date('dHis').','.$codigo.PHP_EOL,FILE_APPEND);  ?>
 
 		<div id="precio"><?php echo $producto ? ( $producto->getMoneda() === "2" ? "USD " : "$ " ) . round( $producto->getPrecio() ) : "---"; ?></div>
 		<img id="infoImg" src="<?php echo $producto ? $producto->getImagen() : ''; ?>">
