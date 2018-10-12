@@ -8,7 +8,7 @@ class Configuracion {
 	public static function cargarDefault() {
 		BD::conexion()->prepare( "DROP TABLE IF EXISTS config" )->execute();
 
-		$create = BD::conexion()->prepare( "CREATE TABLE config (atributo VARCHAR(20), valor VARCHAR(20), descripcion VARCHAR(100))" );
+		$create = BD::conexion()->prepare( "CREATE TABLE config (atributo VARCHAR(40), valor VARCHAR(20), descripcion VARCHAR(100), tipo VARCHAR(10))" );
 
 		if ( !$create->execute() )
 			return "Error: No se pudo crear la tabla de configuración.";
@@ -18,8 +18,8 @@ class Configuracion {
 			foreach ( $config as $c ) {
 				$info = explode( ",", $c );
 
-				$insert = BD::conexion()->prepare( "INSERT INTO config ( atributo, descripcion, valor ) VALUES ( ?, ?, ? )" );
-				$insert->bind_param( "sss", $info[0], $info[1], $info[2] );
+				$insert = BD::conexion()->prepare( "INSERT INTO config ( atributo, descripcion, valor, tipo ) VALUES ( ?, ?, ?, ? )" );
+				$insert->bind_param( "ssss", $info[0], $info[1], $info[2], $info[3] );
 
 				if ( !$insert->execute() )
 					return "Error: No se pudo cargar el parámetro " . $info[0] . ".";
@@ -31,7 +31,7 @@ class Configuracion {
 		if ( !BD::conexion()->query( "SELECT 1 FROM config LIMIT 1" ) )
 			Configuracion::cargarDefault();
 
-		$select = BD::conexion()->prepare( "SELECT atributo, valor, descripcion FROM config" );
+		$select = BD::conexion()->prepare( "SELECT atributo, valor, descripcion, tipo FROM config" );
 		
 		if ( !$select->execute() )
 			return NULL;
@@ -41,12 +41,12 @@ class Configuracion {
 		if ( $select->num_rows === 0 )
 			return NULL;
 
-		$select->bind_result( $atributo, $valor, $descripcion );
+		$select->bind_result( $atributo, $valor, $descripcion, $tipo );
 
 		$params = array();
 
 		while ( $select->fetch() )
-			array_push( $params, new Parametro( $atributo, $valor, $descripcion ) );
+			array_push( $params, new Parametro( $atributo, $valor, $descripcion, $tipo ) );
 
 		return $params;
 	}

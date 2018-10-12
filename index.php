@@ -4,8 +4,6 @@ require( "config/config.php" );
 require( "clases/configuracion.php" );
 require( "clases/producto.php" );
 
-configuracion::definir();
-
 $hayCodigo = isset( $_GET["codigo"] );
 $codigo = $hayCodigo ? $_GET["codigo"] : 0;
 $producto = $hayCodigo ? Producto::consultarProducto( $codigo ) : NULL;
@@ -14,6 +12,7 @@ $producto = $hayCodigo ? Producto::consultarProducto( $codigo ) : NULL;
 <html>
 <head>
 	<title>Consulta de precio</title>
+	<?php require( "estilos.php" );?>
 	<link rel="stylesheet" type="text/css" href="slick/slick.css">
 	<link rel="stylesheet" type="text/css" href="css/stylehseet.css">
 </head>

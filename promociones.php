@@ -13,15 +13,16 @@ if ( isset( $_POST["borrar"] ) )
 <html>
 <head>
 	<title>Promociones</title>
+	<?php require( "estilos.php" );?>
 	<link rel="stylesheet" type="text/css" href="css/stylehseet.css">
 	<link rel="stylesheet" type="text/css" href="css/promociones.css">
 </head>
 <body>
 
 	<div id="menu">
-		<a class="link" href="/consultaprecio/productos.php">Modificar productos</a>
-		<span>Modificar promociones</span>
-		<a class="link" href="/consultaprecio/configuracion.php">Modificar configuración</a>
+		<a class="link" href="/consultaprecio/productos.php">Productos</a>
+		<span>Promociones</span>
+		<a class="link" href="/consultaprecio/configuracion.php">Configuración</a>
 	</div>
 
 	<div id="contenidoAdmin">

@@ -19,15 +19,16 @@ $params = Configuracion::cargar();
 <html>
 <head>
 	<title>Configuracion</title>
+	<?php require( "estilos.php" );?>
 	<link rel="stylesheet" type="text/css" href="css/stylehseet.css">
 	<link rel="stylesheet" type="text/css" href="css/configuracion.css">
 </head>
 <body>
 
 	<div id="menu">
-		<a class="link" href="/consultaprecio/productos.php">Modificar productos</a>
-		<a class="link" href="/consultaprecio/promociones.php">Modificar promociones</a>
-		<span>Modificar configuración</span>
+		<a class="link" href="/consultaprecio/productos.php">Productos</a>
+		<a class="link" href="/consultaprecio/promociones.php">Promociones</a>
+		<span>Configuración</span>
 	</div>
 
 	<div id="parametros">
@@ -46,7 +47,7 @@ $params = Configuracion::cargar();
 					<?php foreach ( $params as $p ) { ?>
 						<tr>
 							<td><?php echo $p->getDescripcion(); ?></td>
-							<td><input type="text" name="<?php echo $p->getNombre(); ?>" value="<?php echo $p->getValor(); ?>"></td>
+							<td><input class="<?php echo $p->getTipo(); ?>" min="0" step="<?php echo $p->getTipo() === 'decimal' ? 0.01 : 1; ?>" type="text" name="<?php echo $p->getNombre(); ?>" value="<?php echo $p->getValor(); ?>"></td>
 						</tr>
 					<?php } ?>
 				</tbody>

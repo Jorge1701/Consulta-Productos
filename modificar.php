@@ -40,6 +40,7 @@ $producto = $hayCodigo ? Producto::consultarProducto( $codigo ) : NULL;
 <html>
 <head>
 	<title>Modificar</title>
+	<?php require( "estilos.php" );?>
 	<link rel="stylesheet" type="text/css" href="css/stylehseet.css">
 	<link rel="stylesheet" type="text/css" href="css/modificarProducto.css">
 </head>

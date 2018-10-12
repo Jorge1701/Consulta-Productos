@@ -68,8 +68,17 @@ class Producto {
 		return $producto;
 	}
 
-	public static function listarProductos() {
-		$select = BD::conexion()->prepare( "SELECT codigo, precio, descripcion, marca, detalle, moneda FROM productos" );
+	public static function listarProductos( $pagina, $cant, $busqueda ) {
+		$select = NULL;
+
+		if ( $busqueda ) {
+			$busqueda = "%{$busqueda}%";
+			$select = BD::conexion()->prepare( "SELECT codigo, precio, descripcion, marca, detalle, moneda FROM productos WHERE codigo LIKE ? OR descripcion LIKE ? OR marca LIKE ? OR detalle LIKE ? LIMIT ?, ?" );
+			$select->bind_param( "ssssii", $busqueda, $busqueda, $busqueda, $busqueda, $pagina, $cant );
+		} else {
+			$select = BD::conexion()->prepare( "SELECT codigo, precio, descripcion, marca, detalle, moneda FROM productos LIMIT ?, ?" );
+			$select->bind_param( "ii", $pagina, $cant );
+		}
 		
 		if ( !$select->execute() )
 			return NULL;
@@ -87,6 +96,21 @@ class Producto {
 			array_push( $productos, new Producto( $codigo, $precio, $descripcion, $marca, $detalle, $moneda ) );
 
 		return $productos;
+	}
+
+	public static function cantPaginas( $cant, $busqueda ) {
+		$select = NULL;
+
+		if ( $busqueda ) {
+			$busqueda = "%{$busqueda}%";
+			$select = BD::conexion()->prepare( "SELECT COUNT( * ) as cant FROM productos WHERE codigo LIKE ? OR descripcion LIKE ? OR marca LIKE ? OR detalle LIKE ?" );
+			$select->bind_param( "ssss", $busqueda, $busqueda, $busqueda, $busqueda );
+		} else
+			$select = BD::conexion()->prepare( "SELECT COUNT( * ) as cant FROM productos" );
+
+		$select->execute();
+		$res = $select->get_result();
+		return ceil( $res->fetch_object()->cant / $cant );
 	}
 
 	public static function modificarProducto( $codigo, $precio, $descripcion, $marca, $detalle, $moneda ) {
@@ -169,14 +193,15 @@ class Producto {
 		foreach ( $productos as $p ) {
 			$valores = explode( ",", $p );
 
-			if ( count( $valores ) !== 6 ) {
+			if ( count( $valores ) > 6 ) {
+				$errores .= "Error: Sobran parámetros, CSV línea " . $linea++ . "\n";
+				$contErr++;
+				continue;
+			} else if ( count( $valores ) < 6 ) {
 				$errores .= "Error: Faltan parámetros, CSV línea " . $linea++ . "\n";
 				$contErr++;
 				continue;
 			}
-
-			for ( $i = 0; $i < count( $valores ); $i++ )
-				$valores[$i] = trim( $valores[$i] );
 
 			$resp = Producto::modificarProducto( $valores[0], $valores[1], $valores[2], $valores[3], $valores[4], $valores[5] );
 

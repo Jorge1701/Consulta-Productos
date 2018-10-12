@@ -51,3 +51,41 @@
 #contenidoAdmin table tr:nth-child(even) {
 	background-color: lightgrey;
 }
+
+#buscador {
+	position: fixed;
+
+	top: calc(25px + 6vh);
+	left: 50px;
+}
+
+#paginas {
+	position: fixed;
+
+	height: 25px;
+
+	bottom: 20px;
+	left: 50px;
+	right: 50px;
+
+	text-align: center;
+	line-height: 25px;
+
+	z-index: 7;
+}
+
+#paginas .pagPrimera {
+	margin-right: 15px;
+}
+
+#paginas .pagActual {
+	text-decoration: none;
+	color: black;
+
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+#paginas .pagUltima {
+	margin-left: 15px;
+}
