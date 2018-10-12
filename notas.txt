@@ -1,20 +1,12 @@
-En php.ini descomentar extension=soap
-
 TODO:
 
-- Barra de busqueda y paginacion
-
 - Chequear desde celulares
-
-- Poner estilos en config.php
-	- Crear tablas si no existen
 
 - Carousel no pasa si hay menos de 3
 
 - Optimizar función de carga
 
 - Manual de instalación
-
 
 Instalación:
 
