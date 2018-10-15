@@ -2,9 +2,9 @@
 
 class Imagen {
 
-	public static function subirImagen( $directorio, $codigo, $extension ) {
-		$archivo = $directorio . $codigo . $extension;
-		$permitido = array( "jpg" => "image/jpg", "jpeg" => "image/jpeg" );
+	public static function subirImagen( $directorio, $codigo ) {
+		$archivo = $directorio . $codigo . ".jpg";
+		$permitido = array( "jpg" => "image/jpg" );
 		$tipoArchivo = strtolower( pathinfo( $archivo, PATHINFO_EXTENSION ) );
 
 		if ( !array_key_exists( $tipoArchivo, $permitido ) )

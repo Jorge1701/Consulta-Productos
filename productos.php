@@ -2,111 +2,137 @@
 
 require( "clases/producto.php" );
 
-$productosPorPagina = 25;
-$p = 0;
-$pagina = 0;
+// Cantidad de páginas que se muestran al lado de la página actual en la paginación
+$mostrarPaginas = 2;
+// Productos Por Página
+$ppp = 20;
+// Página
+$p = 1;
 
-if ( isset( $_GET["p"] ) ) {
-	$pagina = ( intval( $_GET["p"] ) - 1 );
-	$p = $pagina * $productosPorPagina;
-}
-$pagina++;
+if ( isset( $_GET["p"] ) )
+	$p = intval( $_GET["p"] );
 
-$productos = NULL;
-
+// Busqueda
 $b = NULL;
 
-if ( isset( $_GET["b"] ) && $_GET["b"] != "" )
+if ( isset( $_GET["b"] ) )
 	$b = $_GET["b"];
 
-$productos = Producto::listarProductos( $p, $productosPorPagina, $b );
+$productos = Producto::listarProductos( ( $p - 1 ) * $ppp, $ppp, $b );
+$cantPaginas = Producto::cantPaginas( $ppp, $b );
 
-$cantPaginas = Producto::cantPaginas( $productosPorPagina, $b );
+// Mensaje
+$m = isset( $_GET["m"] ) ? $_GET["m"] : "";
+// Error
+$e = isset( $_GET["e"] ) ? $_GET["e"] : "";
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="es-UY">
 <head>
 	<title>Productos</title>
-	<?php require( "estilos.php" );?>
-	<link rel="stylesheet" type="text/css" href="css/stylehseet.css">
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+	<script src="javascript/jquery.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+
 	<link rel="stylesheet" type="text/css" href="css/productos.css">
 </head>
 <body>
 
-	<div id="menu">
-		<span>Productos</span>
-		<a class="link" href="/consultaprecio/promociones.php">Promociones</a>
-		<a class="link" href="/consultaprecio/configuracion.php">Configuración</a>
-	</div>
+	<?php require( "cabecera.php" ); ?>
 
-	<div id="contenidoAdmin">
-		<?php if ( $productos ) { ?>
+	<div class="container">
 
-			<div id="buscador">
-				<form method="GET">
-					<input type="te" name="p" value="1" hidden>
-					<input type="text" name="b" value="<?php echo isset( $b ) ? $b : "";?>">
-					<input type="submit" value="Buscar">
+		<?php if ( $m != "" ) { ?>
+			<div class="alert alert-success">
+				<strong>Ok!</strong> <?php echo $m; ?>
+			</div>
+		<?php } ?>
+
+		<?php if ( $e != "" ) { ?>
+			<div class="alert alert-danger">
+				<strong>Error!</strong> <?php echo $e; ?>
+			</div>
+		<?php } ?>
+
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<form class="form-inline">
+					<div class="input-group">
+						<input type="text" class="form-control" name="b" placeholder="Búsqueda" value="<?php echo isset( $b ) ? $b : ""; ?>">
+						<div class="input-group-btn">
+							<button class="btn btn-default" type="submit">
+								<i class="glyphicon glyphicon-search"></i>
+							</button>
+						</div>
+					</div>
 				</form>
 			</div>
-
-			<table>
-				<tr>
-					<th>Imagen</th>
-					<th>Código</th>
-					<th>Precio</th>
-					<th>Moneda</th>
-					<th>Descripción</th>
-					<th>Marca</th>
-					<th>Detalle</th>
-					<th>Modificar</th>
-				</tr>
-
-				<?php foreach ( $productos as $p ) { ?>
-
-					<tr>
-						<td>
-							<div class="imagen">
-								<img src="<?php echo $p->getImagen(); ?>">
-								<img src="<?php echo $p->getImagen(); ?>">
-							</div>
-						</td>
-						<td><?php echo $p->getCodigo(); ?></td>
-						<td><?php echo $p->getPrecio(); ?></td>
-						<td><?php echo $p->getMoneda() === "1" ? "Pesos" : "Dolares"; ?></td>
-						<td><?php echo $p->getDescripcion(); ?></td>
-						<td><?php echo $p->getMarca(); ?></td>
-						<td><?php echo $p->getDetalle(); ?></td>
-						<td><a href="/consultaprecio/modificar.php?codigo=<?php echo $p->getCodigo(); ?>">Modificar</a></td>
-					</tr>
-
+			<div class="panel-body">
+				<?php if ( $productos ) { ?>
+					<div class="table-responsive">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>Imagen</th>
+									<th>Código</th>
+									<th>Precio</th>
+									<th>Descripción</th>
+									<th>Marca</th>
+									<th>Detalle</th>
+									<th>Modificar</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php foreach ( $productos as $prod ) { ?>
+									<tr>
+										<td>
+											<div class="imagen">
+												<img src="<?php echo $prod->getImagen(); ?>">
+												<img class="img-thumbnail" src="<?php echo $prod->getImagen(); ?>">
+											</div>
+										</td>
+										<td><?php echo $prod->getCodigo(); ?></td>
+										<td><?php echo ( $prod->getMoneda() == "1" ? "$ " : "USD " ) .$prod->getPrecio(); ?></td>
+										<td><?php echo $prod->getDescripcion(); ?></td>
+										<td><?php echo $prod->getMarca(); ?></td>
+										<td><?php echo $prod->getDetalle(); ?></td>
+										<td><a class="btn btn-primary" href="/consultaprecio/modificar.php?codigo=<?php echo $prod->getCodigo(); ?>">Modificar</a></th>
+									</tr>
+								<?php } ?>
+							</tbody>
+						</table>
+					</div>
+				<?php } else { ?>
+					<div class="alert alert-info">
+						<strong>No se encontraron productos</strong>
+					</div>
 				<?php } ?>
-
-			</table>
-
-			<div id="paginas">
-
-				<?php if ( $pagina != 1 ) { ?>
-					<a href="/consultaprecio/productos.php?p=1<?php echo ( isset( $b ) ? "&b=" . $b : "" ); ?>" class="pagPrimera">Primera</a>
-				<?php } ?>
-
-				<?php for ( $i = ( $pagina - 3 ); $i <= ( $pagina + 3 ); $i++ ) { ?>
-					<?php if ( $i <= 0 || $i > $cantPaginas ) continue; ?>
-					<a href="/consultaprecio/productos.php?p=<?php echo $i . ( isset( $b ) ? "&b=" . $b : "" ); ?>" <?php if ( $i == $pagina ) echo "class=\"pagActual\""; ?>><?php echo $i; ?></a>
-				<?php } ?>
-
-				<?php if ( $pagina != $cantPaginas ) { ?>
-					<a href="/consultaprecio/productos.php?p=<?php echo $cantPaginas . ( isset( $b ) ? "&b=" . $b : "" ); ?>" class="pagUltima">Última</a>
-				<?php } ?>
-
 			</div>
+			<?php if ( $productos ) { ?>
+				<div class="panel-footer" style="text-align: center">
+					<ul class="pagination">
+						<?php if ( $p != 1 ) { ?>
+							<li><a href="/consultaprecio/productos.php?p=1<?php echo isset( $b ) ? "&b=" . $b : ""; ?>"><<</a></li>
+						<?php } ?>
 
-		<?php } else { ?>
+						<?php for ( $i = $p - $mostrarPaginas; $i <= $p + $mostrarPaginas; $i++ ) { ?>
+							<?php if ( $i <= 0 || $i > $cantPaginas ) continue; ?>
+							<li class="<?php echo $p == $i ? "active" : ""; ?>"><a href="/consultaprecio/productos.php?p=<?php echo $i; ?><?php echo isset( $b ) ? "&b=" . $b : ""; ?>"><?php echo $i; ?></a></li>
+						<?php } ?>
 
-			<div>No hay productos. <button onclick="window.history.back()">Volver</button></div>
-
-		<?php } ?>
+						<?php if ( $p != $cantPaginas ) { ?>
+							<li><a href="/consultaprecio/productos.php?p=<?php echo $cantPaginas; ?><?php echo isset( $b ) ? "&b=" . $b : ""; ?>">>></a></li>
+						<?php } ?>
+					</ul>
+				</div>
+			<?php } ?>
+		</div>
 	</div>
+
 </body>
 </html>

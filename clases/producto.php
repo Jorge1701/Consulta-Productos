@@ -152,7 +152,7 @@ class Producto {
 		}
 	}
 
-	public static function modificarProductoExistente( $codigoViejo, $codigo, $precio, $descripcion, $marca, $detalle, $moneda, $imagen ) {
+	public static function modificarProductoExistente( $codigoViejo, $codigo, $precio, $descripcion, $marca, $detalle, $moneda ) {
 		$update = BD::conexion()->prepare( "UPDATE productos SET codigo = ?, precio = ?, descripcion = ?, marca = ?, detalle = ?, moneda = ? WHERE codigo = ?" );
 		$update->bind_param( "sdsssss", $codigo, $precio, $descripcion, $marca, $detalle, $moneda, $codigoViejo );
 

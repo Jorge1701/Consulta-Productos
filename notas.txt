@@ -1,6 +1,7 @@
 TODO:
 
-- Chequear desde celulares
+- No cambia la imagen
+	- Chequear desde celulares
 
 - Carousel no pasa si hay menos de 3
 

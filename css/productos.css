@@ -1,12 +1,3 @@
-#contenidoAdmin {
-	width: calc(100vw - 100px);
-	height: calc(100vh - 150px);
-	margin: 50px;
-	margin-top: calc(50px + 6vh);
-
-	overflow: auto;
-}
-
 .imagen {
 	display: inline-block;
 	width: 80px;
@@ -18,7 +9,7 @@
 }
 
 .imagen img:nth-child(2) {
-	position: absolute;
+	position: fixed;
 
 	display: none;
 
@@ -27,65 +18,10 @@
 	top: 10vh;
 	left: 25vw;
 	right: 25vw;
+
+	z-index: 5;
 }
 
 .imagen:hover > img:nth-child(2) {
 	display: block;
-}
-
-#contenidoAdmin table {
-	width: 100%;
-	text-align: center;
-	background-color: white;
-}
-
-#contenidoAdmin table td {
-	vertical-align: middle;
-	text-align: center;
-}
-
-#contenidoAdmin table th {
-	padding: 20px;
-}
-
-#contenidoAdmin table tr:nth-child(even) {
-	background-color: lightgrey;
-}
-
-#buscador {
-	position: fixed;
-
-	top: calc(25px + 6vh);
-	left: 50px;
-}
-
-#paginas {
-	position: fixed;
-
-	height: 25px;
-
-	bottom: 20px;
-	left: 50px;
-	right: 50px;
-
-	text-align: center;
-	line-height: 25px;
-
-	z-index: 7;
-}
-
-#paginas .pagPrimera {
-	margin-right: 15px;
-}
-
-#paginas .pagActual {
-	text-decoration: none;
-	color: black;
-
-	margin-left: 5px;
-	margin-right: 5px;
-}
-
-#paginas .pagUltima {
-	margin-left: 15px;
 }

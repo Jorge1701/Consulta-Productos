@@ -1,40 +1,12 @@
-#imgMuestra {
-	position: fixed;
-
-	width: 35vw;
-
-	top: calc(7vh + 50px);
-	left: 50px;
+span.input-group-addon {
+	width: 100px;
+	text-align: left;
 }
 
-#imgMuestra img {
-	width: 35vw;
+div.input-group {
+	width: 100%;
 }
 
-#contenidoModif form {
-	float: right;
-}
-
-#formModif {
-	position: fixed;
-
-	top: calc(7vh + 50px);
-	left: calc(35vw + 100px);
-}
-
-#formModif h2 {
-	margin-bottom: 20px;
-}
-
-#formModif label {
-	display: inline-block;
-	width: 150px;
-}
-
-#formModif div {
-	margin: 5px 0;
-}
-
-#formModif input[type=submit] {
+div.panel-body img {
 	width: 100%;
 }
