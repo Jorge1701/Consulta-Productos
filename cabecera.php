@@ -13,7 +13,7 @@
 			<ul class="nav navbar-nav">
 				<li class="<?php echo $uri == "/consultaprecio/productos.php" ? "active" : "" ?>"><a href="/consultaprecio/productos.php">Productos</a></li>
 				<li class="<?php echo $uri == "/consultaprecio/promociones.php" ? "active" : "" ?>"><a href="/consultaprecio/promociones.php">Promociones</a></li>
-				<li class="<?php echo $uri == "/consultaprecio/configuracion2.php" ? "active" : "" ?>"><a href="/consultaprecio/configuracion2.php">Configuración</a></li>
+				<li class="<?php echo $uri == "/consultaprecio/configuracion.php" ? "active" : "" ?>"><a href="/consultaprecio/configuracion.php">Configuración</a></li>
 			</ul>
 		</div>
 	</div>

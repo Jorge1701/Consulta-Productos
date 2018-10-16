@@ -291,3 +291,7 @@ body {
 .link:hover {
 	text-decoration: underline;
 }
+
+.f.r {
+	float: right;
+}

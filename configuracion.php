@@ -1,63 +1,65 @@
 <?php
 
-require_once( "clases/configuracion.php" );
+require( "clases/configuracion.php" );
 
 $valores = array_keys( $_POST );
 
-if ( count( $valores ) > 0 ) {
+if ( count( $valores ) > 0 )
 	foreach ( $valores as $v )
 		Configuracion::actualizar( $v, $_POST[$v] );
-}
 
 if ( isset( $_POST["default"] ) )
-	configuracion::cargarDefault();
+	Configuracion::cargarDefault();
 
 $params = Configuracion::cargar();
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="es-UY">
 <head>
-	<title>Configuracion</title>
-	<?php require( "estilos.php" );?>
-	<link rel="stylesheet" type="text/css" href="css/stylehseet.css">
+	<title>Configuración</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+	<script src="javascript/jquery.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+
+	<script src="javascript/configuracion.js"></script>
+
 	<link rel="stylesheet" type="text/css" href="css/configuracion.css">
 </head>
 <body>
 
-	<div id="menu">
-		<a class="link" href="/consultaprecio/productos.php">Productos</a>
-		<a class="link" href="/consultaprecio/promociones.php">Promociones</a>
-		<span>Configuración</span>
-	</div>
+	<?php require( "cabecera.php" ); ?>
 
-	<div id="parametros">
-		<form id="cargar" method="POST">
-			<input type="text" name="default" hidden>
-			<button id="btnCargar" type="button">Cargar configuración por defecto</button>
-		</form>
-		<hr>
-		<form id="guardar" method="POST">
-			<table>
-				<tbody>
-					<tr>
-						<th>Descripción</th>
-						<th>Valor</th>
-					</tr>
+	<div class="container">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<span>Configuración</span>
+				<form id="cargar" method="POST" class="form-inline fr" style="display: inline-block;">
+					<input type="text" name="default" hidden>
+					<button id="btnCargar" type="button" class="btn btn-default fr">Cargar configuración por defecto</button>
+				</form>
+				<div class="clearfix"></div>
+			</div>
+			<div class="panel-body">
+				<form id="guardar" method="POST">
 					<?php foreach ( $params as $p ) { ?>
-						<tr>
-							<td><?php echo $p->getDescripcion(); ?></td>
-							<td><input class="<?php echo $p->getTipo(); ?>" min="0" step="<?php echo $p->getTipo() === 'decimal' ? 0.01 : 1; ?>" type="text" name="<?php echo $p->getNombre(); ?>" value="<?php echo $p->getValor(); ?>"></td>
-						</tr>
+						<div class="panel panel-default">
+							<div class="panel-heading"><?php echo $p->getDescripcion(); ?></div>
+							<div class="panel-body">
+								<input class="form-control fr2" type="text" name="<?php echo $p->getNombre(); ?>" value="<?php echo $p->getValor(); ?>">
+							</div>
+						</div>
 					<?php } ?>
-				</tbody>
-			</table>
 
-			<button id="btnGuardar" type="button">Guardar cambios</button>
-		</form>
+					<button id="btnGuardar" type="button" class="btn btn-primary fr">Guardar cambios</button>
+				</form>
+			</div>
+		</div>
 	</div>
 
-	<script type="text/javascript" src="javascript/jquery.js"></script>
-	<script type="text/javascript" src="javascript/configuracion.js"></script>
 </body>
 </html>

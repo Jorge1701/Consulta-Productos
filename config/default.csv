@@ -1,24 +1,24 @@
-texto_titulo_inicio,Título a mostrar en pantalla de espera,Consultar precio,text
-texto_no_encontrado,Texto a mostrar cuando no se encuentre un producto,No encontrado,text
-tiempo_producto,Tiempo por el cual un producto va a ser mostrado,7000,number
-tiempo_promocion,Tiempo en que demora en pasar una imagen de promoción,3000,number
-col_fondo,Color de fondo,#41a9f4,color
-promo_col_fondo,Pantalla inicio; Color de fondo del título,#ffffff,color
-promo_col_letra,Pantalla inicio; Color de letra del título,#000000,color
-promo_alto_titulo,Pantalla inicio; Alto del título,25,number
-promo_titulo_tam_letra,Pantalla inicio; Tamaño de letra del título en pantalla inicio,13,number
-promo_separacion,Pantalla inicio; Separación entre los bordes de la pantalla y los componentes,4,number
-promo_bordes,Pantalla inicio; Que tan redondeados son los bordes del título en la pantalla inicio,1,number
-info_col_fondo,Info precio; Color de fondo,#ffffff,color
-info_col_letra,Info precio; Color de letra de la descripción y la marca del producto,#000000,color
-info_tam_letra_descripcion,Info precio; Tamaño de la letra de la descripción,10,number
-info_tam_letra_marca,Info precio; Tamaño de la letra de la marca,8,number
-info_margen,Info precio; Margen entre la caja de información y los bordes,15,number
-info_padding,Info precio; Margen entre los bordes de la caja de información y en contenido,3,number
-info_bordes,Info precio; Que tan redondeados son los bordes,2.5,number
-precio_col_fondo,Precio; Color de la caja,#2745ea,color
-precio_col_letra,Precio; Color de la letra,#ffffff,color
-precio_tam_letra,Precio; Tamaño de la letra,17,number
-precio_padding,Precio; Separación entre los bordes de la caja y la letra del precio,5,number
-precio_bordes,Precio; Que tan redondeados son los bordes,2,number
-tiempo,Al cargar cada página los componentes de deslizan a su lugar; este es el tiempo que demoran en llegar,0.4,decimal
+texto_titulo_inicio,Título a mostrar en pantalla de espera,Consultar precio,
+texto_no_encontrado,Texto a mostrar cuando no se encuentre un producto,No encontrado,
+tiempo_producto,Tiempo por el cual un producto va a ser mostrado,7000,
+tiempo_promocion,Tiempo en que demora en pasar una imagen de promoción,3000,
+col_fondo,Color de fondo,#41a9f4,
+promo_col_fondo,Pantalla inicio; Color de fondo del título,#ffffff,
+promo_col_letra,Pantalla inicio; Color de letra del título,#000000,
+promo_alto_titulo,Pantalla inicio; Alto del título,25,
+promo_titulo_tam_letra,Pantalla inicio; Tamaño de letra del título en pantalla inicio,13,
+promo_separacion,Pantalla inicio; Separación entre los bordes de la pantalla y los componentes,4,
+promo_bordes,Pantalla inicio; Que tan redondeados son los bordes del título en la pantalla inicio,1,
+info_col_fondo,Info precio; Color de fondo,#ffffff,
+info_col_letra,Info precio; Color de letra de la descripción y la marca del producto,#000000,
+info_tam_letra_descripcion,Info precio; Tamaño de la letra de la descripción,10,
+info_tam_letra_marca,Info precio; Tamaño de la letra de la marca,8,
+info_margen,Info precio; Margen entre la caja de información y los bordes,15,
+info_padding,Info precio; Margen entre los bordes de la caja de información y en contenido,3,
+info_bordes,Info precio; Que tan redondeados son los bordes,2.5,
+precio_col_fondo,Precio; Color de la caja,#2745ea,
+precio_col_letra,Precio; Color de la letra,#ffffff,
+precio_tam_letra,Precio; Tamaño de la letra,17,
+precio_padding,Precio; Separación entre los bordes de la caja y la letra del precio,5,
+precio_bordes,Precio; Que tan redondeados son los bordes,2,
+tiempo,Al cargar cada página los componentes de deslizan a su lugar; este es el tiempo que demoran en llegar,0.4,

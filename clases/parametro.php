@@ -5,13 +5,11 @@ class Parametro {
 	private $nombre = "";
 	private $valor = "";
 	private $descripcion = "";
-	private $tipo = "";
 
-	public function __construct( $nombre, $valor, $descripcion, $tipo ) {
+	public function __construct( $nombre, $valor, $descripcion ) {
 		$this->nombre = $nombre;
 		$this->valor = $valor;
 		$this->descripcion = $descripcion;
-		$this->tipo = $tipo;
 	}
 
 	public function getNombre() {
@@ -24,10 +22,6 @@ class Parametro {
 
 	public function getDescripcion() {
 		return $this->descripcion;
-	}
-
-	public function getTipo() {
-		return $this->tipo;
 	}
 }
 
