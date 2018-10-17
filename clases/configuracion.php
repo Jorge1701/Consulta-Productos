@@ -8,7 +8,7 @@ class Configuracion {
 	public static function cargarDefault() {
 		BD::conexion()->prepare( "DROP TABLE IF EXISTS config" )->execute();
 
-		$create = BD::conexion()->prepare( "CREATE TABLE config (atributo VARCHAR(40), valor VARCHAR(20), descripcion VARCHAR(256) )" );
+		$create = BD::conexion()->prepare( "CREATE TABLE config (atributo VARCHAR(40), valor VARCHAR(20), descripcion VARCHAR(256), tipo VARCHAR(25) )" );
 
 		if ( !$create->execute() )
 			return "Error: No se pudo crear la tabla de configuración.";
@@ -18,8 +18,13 @@ class Configuracion {
 			foreach ( $config as $c ) {
 				$info = explode( ",", $c );
 
-				$insert = BD::conexion()->prepare( "INSERT INTO config ( atributo, descripcion, valor ) VALUES ( ?, ?, ? )" );
-				$insert->bind_param( "sss", $info[0], $info[1], $info[2] );
+				$atributo = trim( $info[0] );
+				$descripcion = trim( $info[1] );
+				$valor = trim( $info[2] );
+				$tipo = trim( $info[3] );
+
+				$insert = BD::conexion()->prepare( "INSERT INTO config ( atributo, descripcion, valor, tipo ) VALUES ( ?, ?, ?, ? )" );
+				$insert->bind_param( "ssss", $atributo, $descripcion, $valor, $tipo );
 
 				if ( !$insert->execute() )
 					return "Error: No se pudo cargar el parámetro " . $info[0] . ".";
@@ -31,7 +36,7 @@ class Configuracion {
 		if ( !BD::conexion()->query( "SELECT 1 FROM config LIMIT 1" ) )
 			Configuracion::cargarDefault();
 
-		$select = BD::conexion()->prepare( "SELECT atributo, valor, descripcion FROM config" );
+		$select = BD::conexion()->prepare( "SELECT atributo, valor, descripcion, tipo FROM config" );
 		
 		if ( !$select->execute() )
 			return NULL;
@@ -41,12 +46,12 @@ class Configuracion {
 		if ( $select->num_rows === 0 )
 			return NULL;
 
-		$select->bind_result( $atributo, $valor, $descripcion );
+		$select->bind_result( $atributo, $valor, $descripcion, $tipo );
 
 		$params = array();
 
 		while ( $select->fetch() )
-			array_push( $params, new Parametro( $atributo, $valor, $descripcion ) );
+			array_push( $params, new Parametro( $atributo, $valor, $descripcion, $tipo ) );
 
 		return $params;
 	}

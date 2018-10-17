@@ -26,6 +26,9 @@ if ( isset( $_POST["nuevoCodigo"] ) ) {
 
 	if ( $error == "OK" )
 		header( "Location: /consultaprecio/productos.php?m=Producto modificado" );
+} else if ( isset( $_POST["borrar"] ) ) {
+	unlink( $_POST["borrar"] );
+	header( "Location: /consultaprecio/productos.php?m=Imagen eliminada" );
 }
 
 $producto = Producto::consultarProducto( $_GET["codigo"] );
@@ -52,6 +55,7 @@ $producto = Producto::consultarProducto( $_GET["codigo"] );
 	<link rel="stylesheet" type="text/css" href="css/modificarProducto.css">
 	<script type="text/javascript" src="javascript/imgMuestra.js"></script>
 	<script type="text/javascript" src="javascript/validateImgForm.js"></script>
+	<script type="text/javascript" src="javascript/modificar.js"></script>
 </head>
 <body>
 
@@ -119,6 +123,13 @@ $producto = Producto::consultarProducto( $_GET["codigo"] );
 								</div>
 							</div>
 							<button id="enviarForm" type="button" class="btn btn-primary" style="float: right;">Modificar</button>
+						</form>
+						<form id="formBorrar" method="POST">
+							<input type="text" name="borrar" value="<?php echo $producto->getImagen(); ?>" hidden>
+
+							<?php if ( $producto->getImagen() !== "imagenes/logo.jpg" ) { ?>
+								<button id="borrarImagen" type="button" class="btn btn-danger" style="float: left;">Borrar imagen</button>
+							<?php } ?>
 						</form>
 					</div>
 				</div>

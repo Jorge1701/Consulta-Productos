@@ -50,7 +50,13 @@ $params = Configuracion::cargar();
 						<div class="panel panel-default">
 							<div class="panel-heading"><?php echo $p->getDescripcion(); ?></div>
 							<div class="panel-body">
-								<input class="form-control fr2" type="text" name="<?php echo $p->getNombre(); ?>" value="<?php echo $p->getValor(); ?>">
+								<?php if ( $p->getTipo() === "decimal" ) { ?>
+									<input class="form-control fr2" type="number" step="0.1" min="0" name="<?php echo $p->getNombre(); ?>" value="<?php echo $p->getValor(); ?>">
+								<?php } else if ( $p->getTipo() === "number" ) { ?>
+									<input class="form-control fr2" type="number" min="0" name="<?php echo $p->getNombre(); ?>" value="<?php echo $p->getValor(); ?>">
+								<?php } else { ?>
+									<input class="form-control fr2" type="<?php echo trim( $p->getTipo() ); ?>" name="<?php echo $p->getNombre(); ?>" value="<?php echo $p->getValor(); ?>">
+								<?php } ?>
 							</div>
 						</div>
 					<?php } ?>

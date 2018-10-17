@@ -45,7 +45,6 @@ $e = isset( $_GET["e"] ) ? $_GET["e"] : "";
 	<script src="javascript/jquery.js"></script>
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 
-	<script src="javascript/productos.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/productos.css">
 </head>
 <body>
@@ -99,8 +98,9 @@ $e = isset( $_GET["e"] ) ? $_GET["e"] : "";
 									<tr>
 										<td>
 											<div class="imagen">
-												<img src="<?php echo $prod->getImagen() . "?" . time(); ?>">
-												<img class="img-thumbnail" src="<?php echo $prod->getImagen() . "?" . time(); ?>">
+												<?php $fecha = date( "Ymdhis", filemtime( $prod->getImagen() ) ); ?>
+												<img src="<?php echo $prod->getImagen() . "?" . $fecha; ?>">
+												<img class="img-thumbnail" src="<?php echo $prod->getImagen() . "?" . $fecha; ?>">
 											</div>
 										</td>
 										<td><?php echo $prod->getCodigo(); ?></td>
