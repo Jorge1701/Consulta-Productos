@@ -1,5 +1,7 @@
 TODO:
 
+- Agregar para cambiar el logo en la configuración
+
 - Manual de instalación
 
 Instalación:
