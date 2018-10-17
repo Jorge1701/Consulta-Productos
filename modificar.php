@@ -15,13 +15,17 @@ if ( isset( $_POST["nuevoCodigo"] ) ) {
 	$marca = $_POST["marca"];
 	$detalle = $_POST["detalle"];
 
-	if ( isset( $_FILES["imagen"] ) && !$_FILES["imagen"]["error"] )
-		Imagen::subirImagen( "imagenes/productos/", $nuevoCodigo );
+	if ( isset( $_FILES["imagen"] ) && !$_FILES["imagen"]["error"] ) {
+		$error = Imagen::subirImagen( "imagenes/productos/", $nuevoCodigo );
+		if ( $error != "OK" ) {
+			header( "Location: /consultaprecio/productos.php?e=" . $error );
+		} else {
+			$error = Producto::modificarProductoExistente( $codigo, $nuevoCodigo, $precio, $descripcion, $marca, $detalle, $moneda );
 
-	$error = Producto::modificarProductoExistente( $codigo, $nuevoCodigo, $precio, $descripcion, $marca, $detalle, $moneda );
-
-	if ( $error == "OK" )
-		header( "Location: /consultaprecio/productos.php?m=Producto modificado" );
+			if ( $error == "OK" )
+				header( "Location: /consultaprecio/productos.php?m=Producto modificado" );
+		}
+	}
 }
 
 $producto = Producto::consultarProducto( $_GET["codigo"] );
@@ -35,6 +39,12 @@ $producto = Producto::consultarProducto( $_GET["codigo"] );
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0" />
+	<meta http-equiv="cache-control" content="max-age=0" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+	<meta http-equiv="pragma" content="no-cache" />
+
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
 	<script src="javascript/jquery.js"></script>
 	<script src="bootstrap/js/bootstrap.min.js"></script>
@@ -47,12 +57,6 @@ $producto = Producto::consultarProducto( $_GET["codigo"] );
 	<?php require( "cabecera.php" ); ?>
 
 	<div class="container">
-		<?php if ( $error != "" ) { ?>
-			<div class="alert alert-danger">
-				<strong>Error!</strong> <?php echo $error; ?>
-			</div>
-		<?php } ?>
-
 		<div class="row">
 			<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 				<div class="panel panel-default">

@@ -2,11 +2,12 @@
 
 require( "clases/imagen.php" );
 
+if ( isset( $_POST["borrar"] ) )
+	if ( file_exists( "imagenes/promociones/" . $_POST["borrar"] ) )
+		unlink( "imagenes/promociones/" . $_POST["borrar"] );
+
 if ( isset( $_FILES["imagen"] ) && !$_FILES["imagen"]["error"] )
 	Imagen::subirImagen( "imagenes/promociones/", basename( $_FILES["imagen"]["name"] ) );
-
-if ( isset( $_POST["borrar"] ) )
-	unlink( "imagenes/promociones/" . $_POST["borrar"] );
 
 ?>
 <!DOCTYPE html>

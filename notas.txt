@@ -1,8 +1,5 @@
 TODO:
 
-- No cambia la imagen
-	- Chequear desde celulares
-
 - Carousel no pasa si hay menos de 3
 
 - Optimizar función de carga

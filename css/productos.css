@@ -13,11 +13,11 @@
 
 	display: none;
 
-	width: 50vw;
+	width: 30vw;
 
 	top: 10vh;
-	left: 25vw;
-	right: 25vw;
+	left: 35vw;
+	right: 35vw;
 
 	z-index: 5;
 }

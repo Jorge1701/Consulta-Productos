@@ -35,10 +35,17 @@ $e = isset( $_GET["e"] ) ? $_GET["e"] : "";
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
+	<meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0" />
+	<meta http-equiv="cache-control" content="max-age=0" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+	<meta http-equiv="pragma" content="no-cache" />
+
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
 	<script src="javascript/jquery.js"></script>
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 
+	<script src="javascript/productos.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/productos.css">
 </head>
 <body>
@@ -92,8 +99,8 @@ $e = isset( $_GET["e"] ) ? $_GET["e"] : "";
 									<tr>
 										<td>
 											<div class="imagen">
-												<img src="<?php echo $prod->getImagen(); ?>">
-												<img class="img-thumbnail" src="<?php echo $prod->getImagen(); ?>">
+												<img src="<?php echo $prod->getImagen() . "?" . time(); ?>">
+												<img class="img-thumbnail" src="<?php echo $prod->getImagen() . "?" . time(); ?>">
 											</div>
 										</td>
 										<td><?php echo $prod->getCodigo(); ?></td>
