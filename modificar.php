@@ -48,14 +48,14 @@ $producto = Producto::consultarProducto( $_GET["codigo"] );
 	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
 	<meta http-equiv="pragma" content="no-cache" />
 
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
-	<script src="javascript/jquery.js"></script>
-	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.css?<?php echo VERSION; ?>">
+	<script src="javascript/jquery.js?<?php echo VERSION; ?>"></script>
+	<script src="bootstrap/js/bootstrap.min.js?<?php echo VERSION; ?>"></script>
 
-	<link rel="stylesheet" type="text/css" href="css/modificarProducto.css">
-	<script type="text/javascript" src="javascript/imgMuestra.js"></script>
-	<script type="text/javascript" src="javascript/validateImgForm.js"></script>
-	<script type="text/javascript" src="javascript/modificar.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/modificarProducto.css?<?php echo VERSION; ?>">
+	<script type="text/javascript" src="javascript/imgMuestra.js?<?php echo VERSION; ?>"></script>
+	<script type="text/javascript" src="javascript/validateImgForm.js?<?php echo VERSION; ?>"></script>
+	<script type="text/javascript" src="javascript/modificar.js?<?php echo VERSION; ?>"></script>
 </head>
 <body>
 

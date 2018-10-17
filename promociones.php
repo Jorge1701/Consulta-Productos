@@ -1,5 +1,6 @@
 <?php
 
+require( "config/config.php" );
 require( "clases/imagen.php" );
 
 if ( isset( $_POST["borrar"] ) )
@@ -18,14 +19,14 @@ if ( isset( $_FILES["imagen"] ) && !$_FILES["imagen"]["error"] )
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
-	<script src="javascript/jquery.js"></script>
-	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.css?<?php echo VERSION; ?>">
+	<script src="javascript/jquery.js?<?php echo VERSION; ?>"></script>
+	<script src="bootstrap/js/bootstrap.min.js?<?php echo VERSION; ?>"></script>
 
-	<link rel="stylesheet" type="text/css" href="css/promociones.css">
-	<script type="text/javascript" src="javascript/imgMuestra.js"></script>
-	<script type="text/javascript" src="javascript/validateImgForm.js"></script>
-	<script type="text/javascript" src="javascript/promociones.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/promociones.css?<?php echo VERSION; ?>">
+	<script type="text/javascript" src="javascript/imgMuestra.js?<?php echo VERSION; ?>"></script>
+	<script type="text/javascript" src="javascript/validateImgForm.js?<?php echo VERSION; ?>"></script>
+	<script type="text/javascript" src="javascript/promociones.js?<?php echo VERSION; ?>"></script>
 </head>
 <body>
 

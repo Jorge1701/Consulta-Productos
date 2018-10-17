@@ -16,8 +16,8 @@ $producto = $hayCodigo ? Producto::consultarProducto( $codigo ) : NULL;
 <head>
 	<title>Consulta de precio</title>
 	<?php require( "estilos.php" );?>
-	<link rel="stylesheet" type="text/css" href="slick/slick.css">
-	<link rel="stylesheet" type="text/css" href="css/stylehseet.css">
+	<link rel="stylesheet" type="text/css" href="slick/slick.css?<?php echo VERSION; ?>">
+	<link rel="stylesheet" type="text/css" href="css/stylehseet.css?<?php echo VERSION; ?>">
 </head>
 <body>
 

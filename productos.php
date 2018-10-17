@@ -41,11 +41,11 @@ $e = isset( $_GET["e"] ) ? $_GET["e"] : "";
 	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
 	<meta http-equiv="pragma" content="no-cache" />
 
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
-	<script src="javascript/jquery.js"></script>
-	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.css?<?php echo VERSION; ?>">
+	<script src="javascript/jquery.js?<?php echo VERSION; ?>"></script>
+	<script src="bootstrap/js/bootstrap.min.js?<?php echo VERSION; ?>"></script>
 
-	<link rel="stylesheet" type="text/css" href="css/productos.css">
+	<link rel="stylesheet" type="text/css" href="css/productos.css?<?php echo VERSION; ?>">
 </head>
 <body>
 

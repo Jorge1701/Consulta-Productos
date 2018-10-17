@@ -22,13 +22,13 @@ $params = Configuracion::cargar();
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
-	<script src="javascript/jquery.js"></script>
-	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.css?<?php echo VERSION; ?>">
+	<script src="javascript/jquery.js?<?php echo VERSION; ?>"></script>
+	<script src="bootstrap/js/bootstrap.min.js?<?php echo VERSION; ?>"></script>
 
-	<script src="javascript/configuracion.js"></script>
+	<script src="javascript/configuracion.js?<?php echo VERSION; ?>"></script>
 
-	<link rel="stylesheet" type="text/css" href="css/configuracion.css">
+	<link rel="stylesheet" type="text/css" href="css/configuracion.css?<?php echo VERSION; ?>">
 </head>
 <body>
 

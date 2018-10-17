@@ -9,4 +9,6 @@ define( "BD_NOMBRE", "consultaprecio" );
 /* Clave de autorización para los servicios WSDL */
 define( "WSDL_CLAVE", "clave" );
 
+define( "VERSION", 1 );
+
 ?>
