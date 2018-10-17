@@ -22,7 +22,7 @@ $( document ).ready( () => {
 	} else {
 		// Si no hay parámetro "codigo", entonces se esta en la página principal y hay que inicializar el carousel de promociones
 		$( "#promociones" ).slick( {
-			slidesToShow: 3,
+			slidesToShow: aMostrar,
 			slidesToScroll: 1,
 			centerMode: true,
 			arrows: false,

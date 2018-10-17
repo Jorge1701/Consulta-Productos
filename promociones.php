@@ -7,7 +7,7 @@ if ( isset( $_POST["borrar"] ) )
 		unlink( "imagenes/promociones/" . $_POST["borrar"] );
 
 if ( isset( $_FILES["imagen"] ) && !$_FILES["imagen"]["error"] )
-	Imagen::subirImagen( "imagenes/promociones/", basename( $_FILES["imagen"]["name"] ) );
+	Imagen::subirImagen( "imagenes/promociones/", time() );
 
 ?>
 <!DOCTYPE html>
@@ -24,6 +24,7 @@ if ( isset( $_FILES["imagen"] ) && !$_FILES["imagen"]["error"] )
 
 	<link rel="stylesheet" type="text/css" href="css/promociones.css">
 	<script type="text/javascript" src="javascript/imgMuestra.js"></script>
+	<script type="text/javascript" src="javascript/validateImgForm.js"></script>
 	<script type="text/javascript" src="javascript/promociones.js"></script>
 </head>
 <body>
@@ -37,14 +38,14 @@ if ( isset( $_FILES["imagen"] ) && !$_FILES["imagen"]["error"] )
 					<div class="panel-heading">Nueva promoción</div>
 					<div class="panel-body">
 						<img id="imgMuestra" src="" class="img-thumbnail" style="display: none">
-						<form method="POST" enctype="multipart/form-data">
+						<form id="form" method="POST" enctype="multipart/form-data">
 							<div class="form-group">
 								<div class="input-group">
 									<span class="input-group-addon">Imagen</span>
 									<input id="inputImg" class="form-control" type="file" name="imagen" accept="image/jpg">
 								</div>
 							</div>
-							<input type="submit" class="btn btn-primary" value="Cargar" style="float: right;">
+							<button id="enviarForm" class="btn btn-primary" type="button" style="float: right;">Cargar</button>
 						</form>
 					</div>
 				</div>
@@ -67,7 +68,7 @@ if ( isset( $_FILES["imagen"] ) && !$_FILES["imagen"]["error"] )
 												<form id="borrar<?php echo $i; ?>" method="POST">
 													<input type="text" name="borrar" value="<?php echo $promos[$i]; ?>" hidden>
 												</form>
-												<button class="btn btn-danger" style="float: right;" onclick="borrarPromo( '<?php echo $promos[$i]; ?>', <?php echo $i; ?> )">Borrar</button>
+												<button class="btn btn-danger" style="float: right;" onclick="borrarPromo( <?php echo $i; ?> )">Borrar</button>
 												<span style="display: block; clear: both;"></span>
 											</div>
 										</div>

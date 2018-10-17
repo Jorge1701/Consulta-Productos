@@ -10,4 +10,5 @@ $( document ).ready( () => {
 			r.readAsDataURL( inputImg.files[0] );
 		}
 	} );
+	
 } );

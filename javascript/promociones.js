@@ -1,5 +1,5 @@
-function borrarPromo( imagen, codigo ) {
-	if ( confirm( "Desea borrar la imagen " + imagen + "?" ) ) {
+function borrarPromo( codigo ) {
+	if ( confirm( "¿Desea borrar la imagen?" ) ) {
 		$( "#borrar" + codigo ).submit();
 	}
 }

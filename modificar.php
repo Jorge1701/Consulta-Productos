@@ -17,15 +17,15 @@ if ( isset( $_POST["nuevoCodigo"] ) ) {
 
 	if ( isset( $_FILES["imagen"] ) && !$_FILES["imagen"]["error"] ) {
 		$error = Imagen::subirImagen( "imagenes/productos/", $nuevoCodigo );
-		if ( $error != "OK" ) {
-			header( "Location: /consultaprecio/productos.php?e=" . $error );
-		} else {
-			$error = Producto::modificarProductoExistente( $codigo, $nuevoCodigo, $precio, $descripcion, $marca, $detalle, $moneda );
 
-			if ( $error == "OK" )
-				header( "Location: /consultaprecio/productos.php?m=Producto modificado" );
-		}
+		if ( $error != "OK" )
+			header( "Location: /consultaprecio/productos.php?e=" . $error );
 	}
+
+	$error = Producto::modificarProductoExistente( $codigo, $nuevoCodigo, $precio, $descripcion, $marca, $detalle, $moneda );
+
+	if ( $error == "OK" )
+		header( "Location: /consultaprecio/productos.php?m=Producto modificado" );
 }
 
 $producto = Producto::consultarProducto( $_GET["codigo"] );
@@ -51,6 +51,7 @@ $producto = Producto::consultarProducto( $_GET["codigo"] );
 
 	<link rel="stylesheet" type="text/css" href="css/modificarProducto.css">
 	<script type="text/javascript" src="javascript/imgMuestra.js"></script>
+	<script type="text/javascript" src="javascript/validateImgForm.js"></script>
 </head>
 <body>
 
@@ -70,12 +71,12 @@ $producto = Producto::consultarProducto( $_GET["codigo"] );
 				<div class="panel panel-primary">
 					<div class="panel-heading">Modificar producto</div>
 					<div class="panel-body">
-						<form method="POST" enctype="multipart/form-data">
+						<form id="form" method="POST" enctype="multipart/form-data">
 							<input type="text" name="codigo" value="<?php echo $producto->getCodigo(); ?>" hidden>
 							<div class="form-group">
 								<div class="input-group">
 									<span class="input-group-addon">Imagen</span>
-									<input id="inputImg" class="form-control" type="file" accept="image/jpg" name="imagen">
+									<input id="inputImg" class="form-control" type="file" name="imagen" accept="image/jpg">
 								</div>
 							</div>
 							<div class="form-group">
@@ -117,7 +118,7 @@ $producto = Producto::consultarProducto( $_GET["codigo"] );
 									<input class="form-control" type="text" name="detalle" value="<?php echo $producto->getDetalle(); ?>">
 								</div>
 							</div>
-							<input type="submit" class="btn btn-primary" style="float: right;" value="Modificar">
+							<button id="enviarForm" type="button" class="btn btn-primary" style="float: right;">Modificar</button>
 						</form>
 					</div>
 				</div>

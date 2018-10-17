@@ -26,7 +26,7 @@ $producto = $hayCodigo ? Producto::consultarProducto( $codigo ) : NULL;
 	<?php if ( $hayCodigo ) { file_put_contents(date('Ym').'-log.txt', date('dHis').','.$codigo.PHP_EOL,FILE_APPEND);  ?>
 
 		<div id="precio"><?php echo $producto ? ( $producto->getMoneda() === "2" ? "USD " : "$ " ) . round( $producto->getPrecio() ) : "---"; ?></div>
-		<img id="infoImg" src="<?php echo $producto ? $producto->getImagen() : ''; ?>">
+		<img id="infoImg" src="<?php echo $producto && mostrar_imagen == "si" ? $producto->getImagen() : 'imagenes/logo.jpg'; ?>">
 		<div id="informacion">
 			<div>
 				<p id="descripcion"><?php echo $producto ?  $producto->getDescripcion() : texto_no_encontrado; ?></p>
@@ -52,6 +52,9 @@ $producto = $hayCodigo ? Producto::consultarProducto( $codigo ) : NULL;
 	<script type="text/javascript" src="javascript/jquery.js"></script>
 	<script type="text/javascript" src="slick/slick.js"></script>
 	<script type="text/javascript">
+		<?php if ( isset( $archivos ) ) { ?>
+			let aMostrar = <?php echo count( $archivos ) >= 5 ? 3 : 1; ?>;
+		<?php } ?>
 		let tiempoProducto = <?php echo tiempo_producto; ?>;
 		let tiempoPromocion = <?php echo tiempo_promocion; ?>;
 	</script>
@@ -62,7 +65,9 @@ $producto = $hayCodigo ? Producto::consultarProducto( $codigo ) : NULL;
 	<?php if ( $producto ) { ?>
 		<script type="text/javascript">
 			mostrarPrecio();
-			decirPrecio( <?php echo $producto->getPrecio(); ?>, "<?php echo $producto->getMoneda() === "1" ? "pesos" : "dolares"; ?>" );
+			<?php if ( voz == "si" ) { ?>
+				decirPrecio( <?php echo $producto->getPrecio(); ?>, "<?php echo $producto->getMoneda() === "1" ? "pesos" : "dolares"; ?>" );
+			<?php } ?>
 		</script>
 	<?php } ?>
 </body>
