@@ -10,4 +10,9 @@ $( document ).ready( () => {
 			$( guardar ).submit();
 	} );
 
+	$( enviarForm ).click( () => {
+		if ( confirm( "¿Cambiar logo?" ) )
+			$( form ).submit();
+	} );
+
 } );

@@ -67,6 +67,7 @@ $( document ).keydown( ( evento ) => {
 function mostrarPrecio() {
 	precioMostrado = true;
 	precio.style.animation = "anim-precio " + tiempoAnimacion + "s forwards";
+	divCodigo.style.animation = "anim-codigo " + tiempoAnimacion + "s forwards";
 	infoImg.style.animation = "anim-img " + tiempoAnimacion + "s forwards";
 }
 
@@ -83,6 +84,7 @@ function ocultarPrecio() {
 	// Si el precio no se mostro, no es necesario ocultarlo
 	if ( precioMostrado ) {
 		precio.style.animation = "anim-precio-ocultar " + tiempoAnimacion + "s forwards";
+		divCodigo.style.animation = "anim-codigo-ocultar " + tiempoAnimacion + "s forwards";
 		infoImg.style.animation = "anim-img-ocultar " + tiempoAnimacion + "s forwards";
 	}
 

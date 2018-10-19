@@ -1,6 +1,10 @@
 <?php
 
+require( "clases/imagen.php" );
 require( "clases/configuracion.php" );
+
+if ( isset( $_FILES["imagen"] ) && !$_FILES["imagen"]["error"] )
+	Imagen::subirImagen( "imagenes/", "logo" );
 
 $valores = array_keys( $_POST );
 
@@ -27,6 +31,7 @@ $params = Configuracion::cargar();
 	<script src="bootstrap/js/bootstrap.min.js?<?php echo VERSION; ?>"></script>
 
 	<script src="javascript/configuracion.js?<?php echo VERSION; ?>"></script>
+	<script src="javascript/imgMuestra.js?<?php echo VERSION; ?>"></script>
 
 	<link rel="stylesheet" type="text/css" href="css/configuracion.css?<?php echo VERSION; ?>">
 </head>
@@ -35,6 +40,32 @@ $params = Configuracion::cargar();
 	<?php require( "cabecera.php" ); ?>
 
 	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">Logo actual</div>
+					<div class="panel-body">
+						<img id="imgMuestra" class="img-thumbnail" src="imagenes/logo.jpg?<?php echo date( "Ymdhis", filemtime( "imagenes/logo.jpg" ) ); ?>">
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading">Cambiar logo</div>
+					<div class="panel-body">
+						<form id="form" method="POST" enctype="multipart/form-data">
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-addon">Imagen</span>
+									<input id="inputImg" class="form-control" type="file" name="imagen" accept="image/jpg">
+								</div>
+							</div>
+							<button id="enviarForm" class="btn btn-primary" type="button" style="float: right;">Cargar</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<span>Configuración</span>

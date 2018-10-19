@@ -15,6 +15,7 @@
 		--info-col-letra: <?php echo info_col_letra; ?>;
 		--info-tam-letra-descripcion: <?php echo info_tam_letra_descripcion . "vh"; ?>;
 		--info-tam-letra-marca: <?php echo info_tam_letra_marca . "vh"; ?>;
+		--info-tam-letra-detalle: <?php echo info_tam_letra_detalle . "vh"; ?>;
 		--info-margen: <?php echo info_margen . "vh"; ?>;
 		--info-padding: <?php echo info_padding . "vh"; ?>;
 		--info-bordes: <?php echo info_bordes . "vh"; ?>;
@@ -25,6 +26,9 @@
 		--precio-padding: <?php echo precio_padding . "vh"; ?>;
 		--precio-bordes: <?php echo precio_bordes . "vh"; ?>;
 		--precio-sombra: 0 0 2vh .2vh var(--precio-col-fondo);
+
+		--codigo-tam-letra: <?php echo codigo_tam_letra . "vh"; ?>;
+
 		--tiempo: <?php echo tiempo . "s"; ?>;
 	}
 </style>

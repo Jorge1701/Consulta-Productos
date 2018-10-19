@@ -115,7 +115,7 @@ body {
 	position: relative;
 
 	width: calc(100vw - calc(var(--info-margen) * 2));
-	height: calc(100vh - calc(var(--info-margen) * 2));
+	height: calc(calc(100vh - calc(var(--info-margen) * 1.5)) - var(--tam-inst));
 	top: var(--info-margen);
 	left: var(--info-margen);
 
@@ -202,6 +202,11 @@ body {
 
 #marca {
 	font-size: var(--info-tam-letra-marca);
+	margin-bottom: 3vh;
+}
+
+#detalle {
+	font-size: var(--info-tam-letra-detalle);
 }
 
 #precio {
@@ -234,6 +239,39 @@ body {
 }
 
 @keyframes anim-precio-ocultar {
+	from {
+		top: calc(var(--info-margen) / 3);
+	}
+	to {
+		top: 200vh;
+	}
+}
+
+#divCodigo {
+	position: fixed;
+
+	top: -100vh;
+	right: calc(var(--info-margen) * 1.2);
+
+	font-size: var(--codigo-tam-letra);
+	text-align: center;
+
+	background-color: transparent;
+	color: rgba(0, 0, 0, 0.5);
+
+	z-index: 3;
+}
+
+@keyframes anim-codigo {
+	from {
+		top: -100vh;
+	}
+	to {
+		top: calc(var(--info-margen) * 2.25);
+	}
+}
+
+@keyframes anim-codigo-ocultar {
 	from {
 		top: calc(var(--info-margen) / 3);
 	}

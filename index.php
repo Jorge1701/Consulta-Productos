@@ -26,24 +26,28 @@ $producto = $hayCodigo ? Producto::consultarProducto( $codigo ) : NULL;
 	<?php if ( $hayCodigo ) { file_put_contents(date('Ym').'-log.txt', date('dHis').','.$codigo.PHP_EOL,FILE_APPEND);  ?>
 
 		<div id="precio"><?php echo $producto ? ( $producto->getMoneda() === "2" ? "USD " : "$ " ) . round( $producto->getPrecio() ) : "---"; ?></div>
+		<div id="divCodigo"><?php echo $producto ? $producto->getCodigo() : ""; ?></div>
+		
 		<img id="infoImg" src="<?php echo $producto && mostrar_imagen == "si" ? $producto->getImagen() : 'imagenes/logo.jpg'; ?>">
 		<div id="informacion">
 			<div>
 				<p id="descripcion"><?php echo $producto ?  $producto->getDescripcion() : texto_no_encontrado; ?></p>
 				<p id="marca"><?php echo $producto ? $producto->getMarca() : ""; ?></p>
+				<p id="detalle"><?php echo $producto ? $producto->getDetalle() : ""; ?></p>
 			</div>
 		</div>
 
 	<?php } else { ?>
 
-		<img id="img_logo" src="imagenes/logo.jpg">
+		<img id="img_logo" src="imagenes/logo.jpg?<?php echo date( "Ymdhis", filemtime( "imagenes/logo.jpg" ) ); ?>">
 		<p id="titulo_promo"><?php echo texto_titulo_inicio; ?></p>
 
 		<div id="promociones">
-			<img src="imagenes/logo.jpg">
+			<img src="imagenes/logo.jpg?<?php echo date( "Ymdhis", filemtime( "imagenes/logo.jpg" ) ); ?>">
 			<?php $archivos = scandir( "imagenes/promociones" ); ?>
 			<?php for ( $i = 2; $i < count( $archivos ); $i++ ) { ?>
-				<img src="imagenes/promociones/<?php echo $archivos[$i]; ?>">
+				<?php $fm = date( "Ymdhis", filemtime( 'imagenes/promociones/' . $archivos[$i] ) ); ?>
+				<img src="imagenes/promociones/<?php echo $archivos[$i]; ?>?<?php echo $fm; ?>">
 			<?php } ?>
 		</div>
 
